@@ -9,32 +9,46 @@
     <body>
         <div class="container">
             <div class="jumbotron">
-                <h1>Ploutus <small>Visual retirement math.</small></h1>
+                <h1>Ploutus <small>Visualize your retirement.</small></h1>
             </div>
             <div class="container">
-                <form class="form-inline panel">
-                    <fieldset>
-                        <legend>Financial Profile</legend>
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <label class="control-label" for="gross-income">Gross Income</label>
-                                <input class="form-control" name="gross-income" type="text"/>
+                <div class="panel">
+                    <form class="form-inline">
+                        <fieldset>
+                            <legend>Financial Profile</legend>
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label class="control-label" for="gross-income">Gross Income</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input class="form-control" name="gross-income" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-label" for="401k">401k contribution amount</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input class="form-control" name="401k" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-label" for="roth">Roth IRA Contribution</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input class="form-control" name="roth" type="text"/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label class="control-label" for="after-tax">After tax contributions</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input class="form-control" id="after-tax" type="text"/>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-lg-3">
-                                <label class="control-label" for="401k">401k contribution amount</label>
-                                <input class="form-control" name="401k" type="text"/>
-                            </div>
-                            <div class="col-lg-3">
-                                <label class="control-label" for="roth">Roth IRA Contribution</label>
-                                <input class="form-control" name="roth" type="text"/>
-                            </div>
-                            <div class="col-lg-3">
-                                <label class="control-label" for="after-tax">After tax contributions</label>
-                                <input class="form-control" id="after-tax" type="text"/>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
+                        </fieldset>
+                    </form>
+                </div>
                 <div class="panel">
                     <h3>Napkin math output shall appear here.</h3>
                 </div>
