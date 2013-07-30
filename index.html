@@ -21,28 +21,28 @@
                                     <label class="control-label" for="gross-income">Gross Income</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input class="form-control" name="gross-income" type="text"/>
+                                        <input class="form-control" id="gross-income" type="text" data-bind="value: grossIncome()" />
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <label class="control-label" for="401k">401k contribution amount</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input class="form-control" name="401k" type="text"/>
+                                        <input class="form-control" id="401k" type="text" data-bind="value: four01k()" />
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <label class="control-label" for="roth">Roth IRA Contribution</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input class="form-control" name="roth" type="text"/>
+                                        <input class="form-control" id="roth" type="text" data-bind="value: roth()" />
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <label class="control-label" for="after-tax">After tax contributions</label>
                                     <div class="input-group">
                                         <span class="input-group-addon">$</span>
-                                        <input class="form-control" id="after-tax" type="text"/>
+                                        <input class="form-control" id="after-tax" type="text" data-bind="value: afterTax()" />
                                     </div>
                                 </div>
                             </div>
