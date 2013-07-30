@@ -84,3 +84,26 @@
 {"ts":1375226192605,"patch":[[{"diffs":[[0,"ontrol\" "],[-1,"name"],[1,"id"],[0,"=\"401k\" "]],"start1":1677,"start2":1677,"length1":20,"length2":18}]],"length":3374,"saved":false}
 {"ts":1375226196051,"patch":[[{"diffs":[[0,"ontrol\" "],[-1,"name"],[1,"id"],[0,"=\"gross-"]],"start1":1152,"start2":1152,"length1":20,"length2":18}]],"length":3372,"saved":false}
 {"ts":1375226200285,"patch":[[{"diffs":[[0,"ontrol\" "],[-1,"name"],[1,"id"],[0,"=\"roth\" "]],"start1":2183,"start2":2183,"length1":20,"length2":18}]],"length":3370,"saved":false}
+{"ts":1375226629803,"patch":[[{"diffs":[[0,"ue: "],[-1,"four"],[1,"_4"],[0,"01k("]],"start1":1719,"start2":1719,"length1":12,"length2":10}]],"length":3368,"saved":false}
+{"ts":1375226749872,"patch":[[{"diffs":[[0,"<h3>"],[-1,"Napkin math output shall appear here."],[1,"Quick Facts"],[0,"</h3"]],"start1":3021,"start2":3021,"length1":45,"length2":19}]],"length":3342,"saved":false}
+{"ts":1375226801941,"patch":[[{"diffs":[[0," Facts</h3>\n"],[1,"                    <label>Net Income:</label>\n"],[0,"            "]],"start1":3030,"start2":3030,"length1":24,"length2":71}]],"length":3389,"saved":false}
+{"ts":1375226809612,"patch":[[{"diffs":[[0,"Income:</label>\n"],[1,"                    <span></span>\n"],[0,"                "]],"start1":3073,"start2":3073,"length1":32,"length2":66}]],"length":3423,"saved":false}
+{"ts":1375226818001,"patch":[[{"diffs":[[0,"   <span"],[1," data-bind=\"text:\""],[0,"></span>"]],"start1":3106,"start2":3106,"length1":16,"length2":34}]],"length":3441,"saved":false}
+{"ts":1375226827447,"patch":[[{"diffs":[[0,"d=\"text:"],[1," netIncome()"],[0,"\"></span"]],"start1":3123,"start2":3123,"length1":16,"length2":28}]],"length":3453,"saved":false}
+{"ts":1375226888801,"patch":[[{"diffs":[[0,"come()\"></span>\n"],[1,"                    <span data-bind=\"text: unaccounted()\"></span>\n"],[0,"                "]],"start1":3137,"start2":3137,"length1":32,"length2":98}]],"length":3519,"saved":false}
+{"ts":1375226932255,"patch":[[{"diffs":[[0,"come()\"></span>\n"],[1,"                    <label>Yearly Spending (Not Saved)</label>\n"],[0,"                "]],"start1":3137,"start2":3137,"length1":32,"length2":95}]],"length":3582,"saved":false}
+{"ts":1375226935721,"patch":[[{"diffs":[[0,"t Saved)"],[1,":"],[0,"</label>"]],"start1":3199,"start2":3199,"length1":16,"length2":17}]],"length":3583,"saved":false}
+{"ts":1375226943077,"patch":[[{"diffs":[[0,"xt: "],[-1,"unaccounte"],[1,"yearlySpen"],[0,"d()\""]],"start1":3256,"start2":3256,"length1":18,"length2":18}]],"length":3583,"saved":false}
+{"ts":1375227131294,"patch":[[{"diffs":[[0,"         </div>\n"],[1,"                            <div class=\"row\">\n                                <input type=\"button\" class=\"btn\"/>\n                            </div>\n"],[0,"                "]],"start1":2862,"start2":2862,"length1":32,"length2":180}]],"length":3731,"saved":false}
+{"ts":1375227140037,"patch":[[{"diffs":[[0,"ss=\"btn\""],[-1,"/"],[1,">Save</input"],[0,">\n      "]],"start1":2980,"start2":2980,"length1":17,"length2":28}]],"length":3742,"saved":false}
+{"ts":1375227164692,"patch":[[{"diffs":[[0,"btn\""],[-1,">Save</input"],[1," value=\"Calculate\" /"],[0,">\n  "]],"start1":2984,"start2":2984,"length1":20,"length2":28}]],"length":3750,"saved":false}
+{"ts":1375227209867,"patch":[[{"diffs":[[0,"=\"text: "],[1,"$data."],[0,"netIncom"]],"start1":3291,"start2":3291,"length1":16,"length2":22}]],"length":3756,"saved":false}
+{"ts":1375227422911,"patch":[[{"diffs":[[0,"xt: "],[-1,"$data."],[0,"netI"]],"start1":3295,"start2":3295,"length1":14,"length2":8}]],"length":3750,"saved":false}
+{"ts":1375227435649,"patch":[[{"diffs":[[0,"etIncome"],[-1,"()"],[0,"\"></span"]],"start1":3300,"start2":3300,"length1":18,"length2":16}]],"length":3748,"saved":false}
+{"ts":1375227729113,"patch":[[{"diffs":[[0,"   <body"],[1," id=\"body\""],[0,">\n      "]],"start1":354,"start2":354,"length1":16,"length2":26}]],"length":3758,"saved":false}
+{"ts":1375228051149,"patch":[[{"diffs":[[0,"ssIncome"],[-1,"()"],[0,"\" />\n   "]],"start1":1221,"start2":1221,"length1":18,"length2":16}]],"length":3756,"saved":false}
+{"ts":1375228151058,"patch":[[{"diffs":[[0,"e: _401k"],[-1,"()"],[0,"\" />\n   "]],"start1":1728,"start2":1728,"length1":18,"length2":16}]],"length":3754,"saved":false}
+{"ts":1375228152499,"patch":[[{"diffs":[[0,"ue: roth"],[-1,"()"],[0,"\" />\n   "]],"start1":2231,"start2":2231,"length1":18,"length2":16}]],"length":3752,"saved":false}
+{"ts":1375228155481,"patch":[[{"diffs":[[0,"afterTax"],[-1,"()"],[0,"\" />\n   "]],"start1":2750,"start2":2750,"length1":18,"length2":16}]],"length":3750,"saved":false}
+{"ts":1375228161500,"patch":[[{"diffs":[[0,"pend"],[-1,"()"],[0,"\"></"]],"start1":3434,"start2":3434,"length1":10,"length2":8}]],"length":3748,"saved":false}
+{"ts":1375228247474,"patch":[[{"diffs":[[0,"iv>\n"],[-1,"                            <div class=\"row\">\n                                <input type=\"button\" class=\"btn\" value=\"Calculate\" />\n                            </div>\n"],[0,"    "]],"start1":2876,"start2":2876,"length1":175,"length2":8}]],"length":3581,"saved":false}
