@@ -1,10 +1,44 @@
+<!DOCTYPE html>
 <html>
     <head>
+        <title>Ploutus</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" data-main="javascripts/main" src="lib/require.js"></script>
         <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <span>This is the body content.</span>
+        <div class="container">
+            <div class="hero-unit">
+                <h1>Ploutus <small>Visual retirement math.</small></h1>
+            </div>
+            <div class="container">
+                <form>
+                    <fieldset>
+                        <legend>Financial Profile</legend>
+                        <div class="row">
+                            <div class="span3">
+                                <label for="gross-income">Gross Income</label>
+                                <input name="gross-income" type="text"/>
+                            </div>
+                            <div class="span3">
+                                <label for="401k">401k contribution amount</label>
+                                <input name="401k" type="text"/>
+                            </div>
+                            <div class="span3">
+                                <label for="roth">Roth IRA Contribution</label>
+                                <input name="roth" type="text"/>
+                            </div>
+                            <div class="span3">
+                                <label for="after-tax">After tax contributions</label>
+                                <input name="after-tax" type="text"/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <h3>Napkin math output shall appear here.</h3>
+                <h3>Chart shall go here.</h3>
+                <h3>Assumptions shall go here.</h3>
+            </div>
+        </div>
     </body>
 </html>
