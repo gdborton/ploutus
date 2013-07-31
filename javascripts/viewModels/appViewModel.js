@@ -54,7 +54,7 @@ define(['../../lib/knockout-2.3.0'], function(ko) {
             var retirementYear = 100;
             $.each(self.retirementAccountSeries(), function(index, value) {
                 if (value * self.safeWithdrawalRate() > self.yearlySpend()) {
-                    retirementYear = index + 1;
+                    retirementYear = index;
                     return false; // escapes the .each() loop.
                 }
             });
