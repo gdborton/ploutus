@@ -51,10 +51,38 @@
                 </div>
                 <div class="panel">
                     <h3>Quick Facts</h3>
-                    <label>Net Income:</label>
-                    <span data-bind="text: netIncome"></span>
-                    <label>Yearly Spending (Not Saved):</label>
-                    <span data-bind="text: yearlySpend"></span>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>Net Income:</label>
+                            <span data-bind="text: netIncome"></span>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Yearly Spending (Not Saved):</label>
+                            <span data-bind="text: yearlySpend"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label>Yearly Investment</label>
+                            <span data-bind="text: yearlyInvestment"></span>
+                        </div>
+                        <div class="col-lg-6">
+                            <label>Monthly Spending:</label>
+                            <span data-bind="text: monthlySpend"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-offset-6">
+                            <label>Weekly Spending:</label>
+                            <span data-bind="text: weeklySpend"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6 col-offset-6">
+                            <label>Daily Spending:</label>
+                            <span data-bind="text: dailySpend"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel">
                     <h3>Chart shall go here.</h3>
