@@ -9,6 +9,7 @@ define(['../../lib/knockout-2.3.0'], function(ko) {
         self.afterTax = ko.observable(0);
         self.principal = ko.observable(0);
         self.returnRate = ko.observable(0.07);
+        self.safeWithdrawalRate = ko.observable(.04);
         
         self.taxRate = ko.computed(function() {
             return 0.15;
@@ -42,10 +43,22 @@ define(['../../lib/knockout-2.3.0'], function(ko) {
         self.retirementAccountSeries = ko.computed(function() {
             var series = [];
             self.yearlyInvestment();
-            for(var i = 0; i<100; i++) {
+            for (var i = 0; i<100; i++) {
                 series.push(valueAfterYears(i))
             };
-            return series.toString();
+            return series;
+        });
+        
+        // Returns the number of years until user is able to retire.
+        self.yearsTillIndependent = ko.computed(function() {
+            var retirementYear = 100;
+            $.each(self.retirementAccountSeries(), function(index, value) {
+                if (value * self.safeWithdrawalRate() > self.yearlySpend()) {
+                    retirementYear = index + 1;
+                    return false; // escapes the .each() loop.
+                }
+            });
+            return retirementYear;
         });
         
         //  Returns the value of the retirement accounts after a specified number of years.

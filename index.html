@@ -65,13 +65,13 @@
                             <span data-bind="text: netIncome"></span>
                         </div>
                         <div class="col-lg-6">
-                            <label>Yearly Spending (Not Saved):</label>
+                            <label>Yearly Spending</label>
                             <span data-bind="text: yearlySpend"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <label>Yearly Investment</label>
+                            <label>Yearly Investment:</label>
                             <span data-bind="text: yearlyInvestment"></span>
                         </div>
                         <div class="col-lg-6">
@@ -80,7 +80,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 col-offset-6">
+                        <div class="col-lg-6">
+                            <label>Years until retirement:</label>
+                            <span data-bind="text: yearsTillIndependent"></span>
+                        </div>
+                        <div class="col-lg-6">
                             <label>Weekly Spending:</label>
                             <span data-bind="text: weeklySpend"></span>
                         </div>
@@ -127,6 +131,11 @@
                     <p>
                         See <a href="http://goo.gl/3Hf7fY">here</a> for a table of US income tax rates, and a brief
                         explanation on how they're applied.
+                    </p>
+                    <label>Social Security</label>
+                    <p>
+                        Currently the tool doesn't factor in any social security or pension plans.  These will greatly
+                        affect real world situations.
                     </p>
                     <label>Safe Withdrawal Rate</label>
                     <p>
