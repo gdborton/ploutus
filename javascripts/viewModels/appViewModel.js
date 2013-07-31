@@ -1,5 +1,5 @@
 // Main viewmodel class
-define(['../../lib/knockout-2.3.0'], function(ko) {
+define(['../../lib/knockout-2.3.0', '../../lib/jquery-1.10.2.min'], function(ko) {
     function appViewModel() {
         var self = this;
         
