@@ -1,3 +1,9 @@
-require(['../lib/knockout-2.3.0', 'viewModels/appViewModel', '../lib/jquery-1.10.2.min'], function(ko, appViewModel) {
+require.config({
+    paths: {
+        lib: '../libraries'
+    }
+});
+
+require([ 'lib/koExternalTemplateEngine_all.min', 'viewModels/appViewModel'], function() {
     
 });
