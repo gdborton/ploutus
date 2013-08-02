@@ -1,5 +1,5 @@
 // Main viewmodel class
-define(['lib/knockout', 'lib/jquery', 'lib/koExternalTemplateEngine_all.min'], function(ko) {
+define(['lib/knockout', 'highcharts', 'lib/koExternalTemplateEngine_all.min'], function(ko) {
     function appViewModel() {
         var self = this;
         
@@ -43,10 +43,14 @@ define(['lib/knockout', 'lib/jquery', 'lib/koExternalTemplateEngine_all.min'], f
         self.retirementAccountSeries = ko.computed(function() {
             var series = [];
             self.yearlyInvestment();
-            for (var i = 0; i<100; i++) {
+            for (var i = 0; i<50; i++) {
                 series.push(valueAfterYears(i))
             };
             return series;
+        });
+        
+        self.retirementAccountSeries.subscribe(function(newValue){
+            $('#container').highcharts().series[0].setData(newValue);
         });
         
         // Returns the number of years until user is able to retire.
@@ -76,29 +80,35 @@ define(['lib/knockout', 'lib/jquery', 'lib/koExternalTemplateEngine_all.min'], f
         function Round(number) {
             return Math.round(number * 100) / 100;
         }
+        
+        $(function () { 
+            $('#container').highcharts({
+                chart: {
+                    type: 'line'
+                },
+                legend: {
+                  enabled: false  
+                },
+                title: {
+                    text: null
+                },
+                yAxis: {
+                    title: {
+                        text: 'Value in Dollars'
+                    }
+                },
+                xAxis: {
+                    title: {
+                        text: 'Years from Today'
+                    }
+                },
+                series: [{
+                    data: self.retirementAccountSeries()
+                }]
+            });
+        });
+        
     }
     
     ko.applyBindings(new appViewModel());
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
