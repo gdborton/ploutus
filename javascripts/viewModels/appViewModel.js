@@ -39,7 +39,7 @@ define(['lib/knockout', 'highcharts', 'lib/koExternalTemplateEngine_all.min'], f
             return Round(+self._401k() + +self.roth() + +self.afterTax());
         });
         
-        // Returns the value of the retirement accounts for years 0-100.
+        // Returns the value of the retirement accounts for years 0-50.
         self.retirementAccountSeries = ko.computed(function() {
             var series = [];
             self.yearlyInvestment();
@@ -66,6 +66,7 @@ define(['lib/knockout', 'highcharts', 'lib/koExternalTemplateEngine_all.min'], f
         });
         
         //  Returns the value of the retirement accounts after a specified number of years.
+        //  Math for this method found at http://www.moneychimp.com/articles/finworks/fmbasinv.htm
         function valueAfterYears(years) {
             var p = +self.principal();
             var r = +self.returnRate();
@@ -73,8 +74,6 @@ define(['lib/knockout', 'highcharts', 'lib/koExternalTemplateEngine_all.min'], f
             var c = +self.yearlyInvestment();
             
             return (p * Math.pow(z, years)) + c * ( (Math.pow(z, (years+1)) - z) / r);
-            
-            // Math for this method found at http://www.moneychimp.com/articles/finworks/fmbasinv.htm
         }
         
         function Round(number) {
