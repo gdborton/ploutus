@@ -1,0 +1,4 @@
+{"ts":1375818221787,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1375818224976,"patch":[[{"diffs":[[1,"<div></div>"]],"start1":0,"start2":0,"length1":0,"length2":11}]],"length":11,"saved":false}
+{"ts":1375818226414,"patch":[[{"diffs":[[0,"<div>"],[1,"\n    \n"],[0,"</div>"]],"start1":0,"start2":0,"length1":11,"length2":17}]],"length":17,"saved":false}
+{"ts":1375818236303,"patch":[[{"diffs":[[0,"iv>\n    "],[1,"<span data-bind=\"text: netIncome\"></span>"],[0,"\n</div>"]],"start1":2,"start2":2,"length1":15,"length2":56}]],"length":58,"saved":false}

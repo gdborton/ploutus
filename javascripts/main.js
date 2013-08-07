@@ -1,12 +1,16 @@
 require.config({
     paths: {
         "lib": 'libraries',
-        "highcharts": "libraries/highcharts"
+        "highcharts": "libraries/highcharts",
+        "bootstrap": "libraries/bootstrap.min"
     },
     shim: {
         'highcharts': {
             "exports": "Highcharts",
             "deps": ['lib/jquery']
+        },
+        'bootstrap': {
+            'deps': ['lib/jquery']
         }
     }
 });

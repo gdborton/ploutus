@@ -14,90 +14,22 @@
             </div>
             <div class="container">
                 <div class="panel">
-                    <form class="form-inline">
-                        <fieldset>
-                            <legend>Financial Profile</legend>
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <label class="control-label" for="gross-income">Gross Income</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">$</span>
-                                        <input class="form-control" id="gross-income" type="text" data-bind="value: grossIncome" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <label class="control-label" for="401k">401k contribution amount</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">$</span>
-                                        <input class="form-control" id="401k" type="text" data-bind="value: _401k" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <label class="control-label" for="roth">Roth IRA Contribution</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">$</span>
-                                        <input class="form-control" id="roth" type="text" data-bind="value: roth" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <label class="control-label" for="after-tax">After tax contributions</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">$</span>
-                                        <input class="form-control" id="after-tax" type="text" data-bind="value: afterTax" />
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <label class="control-label" for="principal">Current retirement portfolio value</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">$</span>
-                                        <input class="form-control" id="principal" type="text" data-bind="value: principal" />
-                                    </div>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
+                    <div class="pull-right">
+                        <a href="" data-bind="click: showSimple, css: { 'text-muted': !isAdvanced() }">Simple</a> |
+                        <a href="" data-bind="click: showAdvanced, css: { 'text-muted': isAdvanced() }">Advanced</a>
+                    </div>
+                    
+                    <h3>Financial Profile</h3>
+                    <hr>
+                    
+                    <div data-bind="template: { name: 'views/simple' }, visible: !isAdvanced() "></div>
+                    <div data-bind="template: { name: 'views/advanced' }, visible: isAdvanced() "></div>
                 </div>
+                
+                <div class="panel" data-bind="template: { name: 'views/quick_facts'}, visible: isAdvanced()"></div>
+                
                 <div class="panel">
-                    <h3>Quick Facts</h3>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label>Net Income:</label>
-                            <span data-bind="text: netIncome"></span>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Yearly Spending</label>
-                            <span data-bind="text: yearlySpend"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label>Yearly Investment:</label>
-                            <span data-bind="text: yearlyInvestment"></span>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Monthly Spending:</label>
-                            <span data-bind="text: monthlySpend"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label>Years until retirement:</label>
-                            <span data-bind="text: yearsTillIndependent"></span>
-                        </div>
-                        <div class="col-lg-6">
-                            <label>Weekly Spending:</label>
-                            <span data-bind="text: weeklySpend"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6 col-offset-6">
-                            <label>Daily Spending:</label>
-                            <span data-bind="text: dailySpend"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel">
-                    <h3>Portfolio Growth.</h3>
+                    <h3>Portfolio Growth</h3>
                     <div id="container" style="width:100%; height:400px;"></div>
                 </div>
                 <div class="panel" data-bind="template: { name: 'views/assumptions' }"></div>
