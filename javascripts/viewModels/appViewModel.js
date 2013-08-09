@@ -9,7 +9,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         self.afterTax = ko.observable(0);
         self.principal = ko.observable(0);
         self.returnRate = ko.observable(0.07);
-        self.safeWithdrawalRate = ko.observable(0.04);
+        self.safeWithdrawalRate = ko.observable(4);
         self.isAdvanced = ko.observable(false);
         self.simpleSavingsRate = ko.observable(10);
         self.filingStatuses = ko.observable(taxBrackets);
@@ -70,7 +70,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         // Returns the required retirement portfolio value.
         self.requiredRetirementAmount = function() {
             if (self.isAdvanced()) {
-                return self.yearlySpend() / self.safeWithdrawalRate();
+                return self.yearlySpend() / (self.safeWithdrawalRate() / 100);
             }
             else {
                 return (100 - self.simpleSavingsRate()) / 0.04;
