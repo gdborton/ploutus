@@ -35,14 +35,12 @@
             </div>
             <div class="container">
                 <div class="panel">
-                    <div class="pull-right">
+                    <div class="pull-right" style="height:0px">
                         <a href="" data-bind="click: showSimple, css: { 'text-muted': !isAdvanced() }">Simple</a> |
                         <a href="" data-bind="click: showAdvanced, css: { 'text-muted': isAdvanced() }">Advanced</a>
                     </div>
                     
-                    <h3>Financial Profile</h3>
-                    <hr>
-                    
+                    <legend>Financial Profile</legend>
                     <div data-bind="template: { name: 'views/simple' }, visible: !isAdvanced() "></div>
                     <div data-bind="template: { name: 'views/advanced' }, visible: isAdvanced() "></div>
                 </div>
@@ -50,7 +48,7 @@
                 <div class="panel" data-bind="template: { name: 'views/quick_facts'}, visible: isAdvanced()"></div>
                 
                 <div class="panel">
-                    <h3>Portfolio Growth</h3>
+                    <legend>Portfolio Growth</legend>
                     <div id="container" style="width:100%; height:400px;"></div>
                 </div>
                 <div class="panel" data-bind="template: { name: 'views/assumptions' }"></div>
