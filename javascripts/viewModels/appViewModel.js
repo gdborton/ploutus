@@ -8,7 +8,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         self.roth = ko.observable(0);
         self.afterTax = ko.observable(0);
         self.principal = ko.observable(0);
-        self.returnRate = ko.observable(0.07);
+        self.returnRate = ko.observable(7);
         self.safeWithdrawalRate = ko.observable(4);
         self.isAdvanced = ko.observable(false);
         self.simpleSavingsRate = ko.observable(10);
@@ -136,7 +136,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
             
             if(self.isAdvanced()) {
                 p = +self.principal();
-                r = +self.returnRate();
+                r = +self.returnRate()/100;
                 c = +self.yearlyInvestment();
             }
             
