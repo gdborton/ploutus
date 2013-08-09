@@ -1,5 +1,5 @@
 // Main viewmodel class
-define(['lib/knockout', 'highcharts', 'lib/koExternalTemplateEngine_all.min', 'bootstrap'], function(ko) {
+define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEngine_all.min', 'bootstrap'], function(ko, taxBrackets) {
     function appViewModel() {
         var self = this;
         
@@ -12,9 +12,11 @@ define(['lib/knockout', 'highcharts', 'lib/koExternalTemplateEngine_all.min', 'b
         self.safeWithdrawalRate = ko.observable(0.04);
         self.isAdvanced = ko.observable(false);
         self.simpleSavingsRate = ko.observable(10);
+        self.filingStatuses = ko.observable(taxBrackets);
+        self.filingStatus = ko.observable(self.filingStatuses()[0]);
         
         self.isAdvanced.subscribe(function(newValue) {
-            $('#container').highcharts().yAxis[0].axisTitle.attr({text: yAxisTitle()})
+            $('#container').highcharts().yAxis[0].axisTitle.attr({text: yAxisTitle()});
         });
         
         self.showSimple = function() {
@@ -30,7 +32,19 @@ define(['lib/knockout', 'highcharts', 'lib/koExternalTemplateEngine_all.min', 'b
         });
         
         self.netIncome = ko.computed(function() {
-            return Round( self.grossIncome() - self._401k() ) * ( 1 - self.taxRate() );
+            var taxableIncome = (self.grossIncome() - self._401k() );
+            var returnValue = 0;
+            
+            $.each(self.filingStatus().brackets, function(index, bracket){
+                if(taxableIncome >= bracket.max) {
+                    returnValue += (bracket.max - bracket.min) * (1 - bracket.rate);
+                } else {
+                    returnValue += (taxableIncome - bracket.min) * (1 - bracket.rate);
+                    return false; // Breaks the jQuery loop.
+                }
+            });
+            
+            return Round(returnValue);
         });
         
         self.yearlySpend = ko.computed(function() {
