@@ -8,17 +8,25 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         self.isAdvanced = ko.observable(false);
         self.filingStatuses = ko.observable(taxBrackets);
 
-
-        self.snapshots = ko.observableArray([]);
-
-        self.snapshots.push({
-            grossIncome: ko.observable(0),
-            _401k: ko.observable(0),
-            roth: ko.observable(0),
-            afterTax: ko.observable(0),
-            principal: ko.observable(0),
-            filingStatus: ko.observable(self.filingStatuses()[0])
+        self.ages = ko.computed(function() {
+            var ages = [];
+            for(var age = 18; age < 100; age++) {
+                ages.push(age);
+            }
+            return ages;
         });
+
+        self.snapshots = ko.observableArray([
+            {
+                age: ko.observable(22),
+                grossIncome: ko.observable(0),
+                _401k: ko.observable(0),
+                roth: ko.observable(0),
+                afterTax: ko.observable(0),
+                principal: ko.observable(0),
+                filingStatus: ko.observable(self.filingStatuses()[0])
+            }
+        ]);
 
         self.firstSnap = ko.observable(self.snapshots()[0]);
 
@@ -85,8 +93,10 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
             self.snapshots.push(cloneSnapshot(lastSnapshot));
         };
 
+        self.panelTitle = function(age) {
+            return "Age: " + age();
+        };
 
-        
         // Returns the series of retirement portfolio values.
         // Defaults to 50 years, but decreaes to FI + 10 when the FI year is found.
         self.retirementAccountSeries = ko.computed(function() {
@@ -157,6 +167,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         // Returns a snapshot that is a clone of the one provided.
         function cloneSnapshot(originalSnapshot){
             return {
+                age: ko.observable(originalSnapshot.age() + 1),
                 grossIncome: ko.observable(originalSnapshot.grossIncome()),
                 _401k: ko.observable(originalSnapshot._401k()),
                 roth: ko.observable(originalSnapshot.roth()),

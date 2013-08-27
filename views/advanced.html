@@ -1,8 +1,15 @@
 <form class="form-inline">
     <!-- ko foreach: snapshots -->
-    <div class="panel">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title" data-bind="text: $parent.panelTitle(age)"></h3>
+        </div>
         <fieldset>
             <div class="row">
+                <div class="col-lg-3">
+                    <label class="control-label">Age</label>
+                    <select class="form-control" data-bind="options: $parent.ages, value: age"></select>
+                </div>
                 <div class="col-lg-3">
                     <label class="control-label">Filing Status</label>
                     <select class="form-control"
