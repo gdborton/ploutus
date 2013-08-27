@@ -2,40 +2,42 @@
 define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEngine_all.min', 'bootstrap'], function(ko, taxBrackets) {
     function appViewModel() {
         var self = this;
-        
-        self.grossIncome = ko.observable(0);
-        self._401k = ko.observable(0);
-        self.roth = ko.observable(0);
-        self.afterTax = ko.observable(0);
-        self.principal = ko.observable(0);
+
         self.returnRate = ko.observable(7);
         self.safeWithdrawalRate = ko.observable(4);
         self.isAdvanced = ko.observable(false);
-        self.simpleSavingsRate = ko.observable(10);
         self.filingStatuses = ko.observable(taxBrackets);
-        self.filingStatus = ko.observable(self.filingStatuses()[0]);
-        
-        self.isAdvanced.subscribe(function(newValue) {
-            $('#container').highcharts().yAxis[0].axisTitle.attr({text: yAxisTitle()});
+
+
+        self.snapshots = ko.observableArray([]);
+
+        self.snapshots.push({
+            grossIncome: ko.observable(0),
+            _401k: ko.observable(0),
+            roth: ko.observable(0),
+            afterTax: ko.observable(0),
+            principal: ko.observable(0),
+            filingStatus: ko.observable(self.filingStatuses()[0])
         });
-        
+
+        self.firstSnap = ko.observable(self.snapshots()[0]);
+
+        // Shows the simple view to the user.
         self.showSimple = function() {
             self.isAdvanced(false);
         };
-        
+
+        // Shows the advanced view to the user.
         self.showAdvanced = function() {
             self.isAdvanced(true);
         };
-        
-        self.taxRate = ko.computed(function() {
-            return 0.15;
-        });
-        
+
+        // Calculates the net income after 401k contributions.
         self.netIncome = ko.computed(function() {
-            var taxableIncome = (self.grossIncome() - self._401k() );
+            var taxableIncome = (self.snapshots()[0].grossIncome() - self.snapshots()[0]._401k() );
             var returnValue = 0;
             
-            $.each(self.filingStatus().brackets, function(index, bracket){
+            $.each(self.snapshots()[0].filingStatus().brackets, function(index, bracket){
                 if(taxableIncome >= bracket.max) {
                     returnValue += (bracket.max - bracket.min) * (1 - bracket.rate);
                 } else {
@@ -46,35 +48,35 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
             
             return Round(returnValue);
         });
-        
+
+        // Calculates the yearly spend based on income not saved.
         self.yearlySpend = ko.computed(function() {
-            return Round(self.netIncome() - self.roth() - self.afterTax());
+            return Round(self.netIncome() - self.snapshots()[0].roth() - self.snapshots()[0].afterTax());
         });
-        
+
+        // Calculates the monthly spend based on income not saved.
         self.monthlySpend = ko.computed(function() {
             return Round(self.yearlySpend() / 12);
         });
-        
+
+        // Calculates the weekly spend based on income not saved.
         self.weeklySpend = ko.computed(function() {
             return Round(self.monthlySpend() / 4);
         });
-        
+
+        // Calculates the daily spend based on inceom not saved.
         self.dailySpend = ko.computed(function() {
             return Round(self.monthlySpend() / 30.4);
         });
-        
+
+        // Calulates the sum of the years investments.
         self.yearlyInvestment = ko.computed(function() {
-            return Round(+self._401k() + +self.roth() + +self.afterTax());
+            return Round(+self.snapshots()[0]._401k() + +self.snapshots()[0].roth() + +self.snapshots()[0].afterTax());
         });
         
         // Returns the required retirement portfolio value.
         self.requiredRetirementAmount = function() {
-            if (self.isAdvanced()) {
-                return self.yearlySpend() / (self.safeWithdrawalRate() / 100);
-            }
-            else {
-                return (100 - self.simpleSavingsRate()) / 0.04;
-            }
+            return self.yearlySpend() / (self.safeWithdrawalRate() / 100);
         };
         
         // Returns the series of retirement portfolio values.
@@ -130,15 +132,9 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         //  Returns the value of the retirement accounts after a specified number of years.
         //  Math for this method found at http://www.moneychimp.com/articles/finworks/fmbasinv.htm
         function valueAfterYears(years) {
-            var p = 0;
-            var r = 0.07;
-            var c = self.simpleSavingsRate();
-            
-            if(self.isAdvanced()) {
-                p = +self.principal();
-                r = +self.returnRate()/100;
-                c = +self.yearlyInvestment();
-            }
+            p = +self.snapshots()[0].principal();
+            r = +self.returnRate()/100;
+            c = +self.yearlyInvestment();
             
             var z = 1+r;
             
@@ -148,16 +144,6 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         // Rounds a number to a max of two decimal places.
         function Round(number) {
             return Math.round(number * 100) / 100;
-        }
-        
-        // Returns the chart yAxis title, based on the context.
-        function yAxisTitle() {
-            if(self.isAdvanced()) {
-                return 'Value in Dollars';
-            }
-            else {
-                return 'Percent of Gross Income';
-            }
         }
         
         // Creates the chart.
@@ -171,7 +157,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 },
                 yAxis: {
                     title: {
-                        text: yAxisTitle()
+                        text: "Value in Dollars"
                     }
                 },
                 xAxis: {
@@ -192,10 +178,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 tooltip: {
                     formatter: function() {
                         var returnString = 'Year: ' + this.x + '<br/>';
-                        if(self.isAdvanced())
-                            return returnString.concat(this.series.name + ': $' + this.y);
-                        else
-                            return returnString.concat(this.series.name + ': ' + this.y + '%');
+                        return returnString.concat(this.series.name + ': $' + this.y);
                     }
                 }
             });
