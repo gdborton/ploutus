@@ -16,17 +16,37 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
             return ages;
         });
 
-        self.snapshots = ko.observableArray([
-            {
-                age: ko.observable(22),
-                grossIncome: ko.observable(0),
-                _401k: ko.observable(0),
-                roth: ko.observable(0),
-                afterTax: ko.observable(0),
-                principal: ko.observable(0),
-                filingStatus: ko.observable(self.filingStatuses()[0])
-            }
-        ]);
+        self.snapshots = ko.observableArray([{
+            age: ko.observable(22),
+            grossIncome: ko.observable(0),
+            _401k: ko.observable(0),
+            roth: ko.observable(0),
+            afterTax: ko.observable(0),
+            principal: ko.observable(0),
+            filingStatus: ko.observable(self.filingStatuses()[0]),
+            isExpanded: ko.observable(true)
+        }]);
+
+        self.snapshots.subscribe(function(newArray) {
+            $.each(self.snapshots(), function(index, element) {
+
+                element.panelTitle = ko.computed(function(){
+                    return "Age: " + element.age();
+                });
+
+                element.panelCollapseText = ko.computed(function() {
+                    if (element.isExpanded())
+                        return "Collapse";
+                    return "Expand";
+                });
+
+                element.togglePanel = function() {
+                    element.isExpanded(!element.isExpanded());
+                }
+            });
+        });
+
+        self.snapshots.valueHasMutated(); // Calls subscribe function before the view loads to attach events.
 
         self.firstSnap = ko.observable(self.snapshots()[0]);
 
@@ -91,10 +111,6 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         self.newSnapshot = function(){
             var lastSnapshot = self.snapshots()[self.snapshots().length - 1]; // The last snapshot in the list.
             self.snapshots.push(cloneSnapshot(lastSnapshot));
-        };
-
-        self.panelTitle = function(age) {
-            return "Age: " + age();
         };
 
         // Returns the series of retirement portfolio values.
@@ -173,7 +189,8 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 roth: ko.observable(originalSnapshot.roth()),
                 afterTax: ko.observable(originalSnapshot.afterTax()),
                 principal: ko.observable(originalSnapshot.principal()),
-                filingStatus: ko.observable(originalSnapshot.filingStatus())
+                filingStatus: ko.observable(originalSnapshot.filingStatus()),
+                isExpanded: ko.observable(true)
             };
         }
         
