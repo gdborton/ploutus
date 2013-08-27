@@ -78,6 +78,14 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         self.requiredRetirementAmount = function() {
             return self.yearlySpend() / (self.safeWithdrawalRate() / 100);
         };
+
+        // Pushes a new snapshot onto the snapshot array.
+        self.newSnapshot = function(){
+            var lastSnapshot = self.snapshots()[self.snapshots().length - 1]; // The last snapshot in the list.
+            self.snapshots.push(cloneSnapshot(lastSnapshot));
+        };
+
+
         
         // Returns the series of retirement portfolio values.
         // Defaults to 50 years, but decreaes to FI + 10 when the FI year is found.
@@ -144,6 +152,18 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         // Rounds a number to a max of two decimal places.
         function Round(number) {
             return Math.round(number * 100) / 100;
+        }
+
+        // Returns a snapshot that is a clone of the one provided.
+        function cloneSnapshot(originalSnapshot){
+            return {
+                grossIncome: ko.observable(originalSnapshot.grossIncome()),
+                _401k: ko.observable(originalSnapshot._401k()),
+                roth: ko.observable(originalSnapshot.roth()),
+                afterTax: ko.observable(originalSnapshot.afterTax()),
+                principal: ko.observable(originalSnapshot.principal()),
+                filingStatus: ko.observable(originalSnapshot.filingStatus())
+            };
         }
         
         // Creates the chart.
