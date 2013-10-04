@@ -6,7 +6,7 @@
             <span class="pull-right" data-bind="text: panelCollapseText, click: togglePanel"></span>
             <div class="clearfix"></div>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" data-bind="visible: isExpanded">
             <fieldset>
                 <div class="row">
                     <div class="col-lg-3">
@@ -71,6 +71,12 @@
                             <input class="form-control" type="text" data-bind="value: $parent.returnRate"/>
                             <span class="input-group-addon">%</span>
                         </div>
+                    </div>
+                    <div class="col-lg-offset-3 col-lg-3">
+                        <button type="button" class="btn label-offset"
+                                data-bind="click: $parent.deleteSnapshot, visible: $parent.isDeleteVisible">
+                            Delete this financial snapshot
+                        </button>
                     </div>
                 </div>
             </fieldset>

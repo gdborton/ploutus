@@ -15,7 +15,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
 
         self.ages = ko.computed(function() {
             var ages = [];
-            for(var age = 18; age < 100; age++) {
+            for(var age = 16; age < 100; age++) {
                 ages.push(age);
             }
             return ages;
@@ -52,6 +52,12 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         });
 
         self.snapshots.valueHasMutated(); // Calls subscribe function before the view loads to attach events.
+
+        self.isDeleteVisible = ko.computed(function() {
+            if (self.snapshots().length > 1)
+                return true;
+            return false;
+        });
 
         self.firstSnap = ko.observable(self.snapshots()[0]);
 
@@ -119,6 +125,10 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         self.newSnapshot = function(){
             var lastSnapshot = self.snapshots()[self.snapshots().length - 1]; // The last snapshot in the list.
             self.snapshots.push(cloneSnapshot(lastSnapshot));
+        };
+
+        self.deleteSnapshot = function(variable) {
+            console.log("delete", variable);
         };
 
         // Returns the series of retirement portfolio values.

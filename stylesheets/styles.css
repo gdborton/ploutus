@@ -2,3 +2,7 @@
     height: 50px;
     text-align: center;
 }
+
+.label-offset {
+    margin-top: 24px;
+}
