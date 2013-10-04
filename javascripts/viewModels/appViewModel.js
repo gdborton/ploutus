@@ -289,7 +289,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 _401k: ko.observable(originalSnapshot._401k()),
                 roth: ko.observable(originalSnapshot.roth()),
                 afterTax: ko.observable(originalSnapshot.afterTax()),
-                principal: ko.observable(originalSnapshot.principal()),
+                principal: ko.observable(Round(originalSnapshot.valueAfterYears(1))),
                 filingStatus: ko.observable(originalSnapshot.filingStatus()),
                 isExpanded: ko.observable(true)
             };
