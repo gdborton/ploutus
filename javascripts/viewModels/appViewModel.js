@@ -127,8 +127,9 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
             self.snapshots.push(cloneSnapshot(lastSnapshot));
         };
 
-        self.deleteSnapshot = function(variable) {
-            console.log("delete", variable);
+        self.deleteSnapshot = function(snapshot) {
+            var snapshotIndex = $.inArray(snapshot, self.snapshots());
+            self.snapshots.splice(snapshotIndex, 1);
         };
 
         // Returns the series of retirement portfolio values.
