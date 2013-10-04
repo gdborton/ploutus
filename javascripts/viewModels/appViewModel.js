@@ -137,7 +137,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         };
 
         // Returns the series of retirement portfolio values.
-        // Defaults to 50 years, but decreaes to FI + 10 when the FI year is found.
+        // Defaults to 50 years, but decreases to FI + 10 when the FI year is found.
         self.retirementAccountSeries = ko.computed(function() {
             var series = [];
             var maxYears = 50;
@@ -157,7 +157,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         self.requiredPortfolioSeries = ko.computed(function() {
             var series = [];
             
-            for (var i = 0; i<self.retirementAccountSeries().length; i++) {
+            for (var i = 0; i < self.retirementAccountSeries().length; i++) {
                 series.push(Round(self.requiredRetirementAmount()));
             }
             
