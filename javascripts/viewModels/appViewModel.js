@@ -11,6 +11,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
 
         self.isAdvanced.subscribe(function(newValue) {
             $('#container').highcharts().yAxis[0].axisTitle.attr({text: yAxisTitle()});
+            $('#container').highcharts().xAxis[0].axisTitle.attr({text: xAxisTitle()});
         });
 
         self.ages = ko.computed(function() {
@@ -127,9 +128,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 sortedArray.push(snapshot.age());
             });
 
-            sortedArray.sort(function(a, b) { return a - b; })
-            debugger;
-            return sortedArray;
+            return sortedArray.sort(function(a, b) { return a - b; });
         });
 
         self.snapshots.valueHasMutated(); // Calls subscribe function before the view loads to attach events.
@@ -167,31 +166,59 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
             self.snapshots.splice(snapshotIndex, 1);
         };
 
+        // Returns the required retirement portfolio value.
+        self.simpleRequiredRetirementAmount = function() {
+            return (100 - self.simpleSavingsRate()) / 0.04;
+        };
+
+        //  Returns the value of the retirement accounts after a specified number of years.
+        //  Math for this method found at http://www.moneychimp.com/articles/finworks/fmbasinv.htm
+        self.simpleValueAfterYears = function (years) {
+            var p = 0;
+            var r = 0.07;
+            var c = self.simpleSavingsRate();
+
+            var z = 1+r;
+
+            return (p * Math.pow(z, years)) + c * ( (Math.pow(z, (years+1)) - z) / r);
+        }
+
         // Returns the series of retirement portfolio values.
         // Defaults to 50 years, but decreases to FI + 10 when the FI year is found.
         self.retirementAccountSeries = ko.computed(function() {
             var series = [];
 
-            $.each(self.snapshotAges(), function(ageIndex, age) {
-                var maxYears = 50;
+            if(self.isAdvanced()){
+                $.each(self.snapshotAges(), function(ageIndex, age) {
+                    var maxYears = 50;
 
-                if ( ageIndex !== self.snapshotAges().length -1 ) {
-                    var nextAge = self.snapshotAges()[ageIndex + 1];
-                    maxYears = nextAge - age;
-                }
-
-                $.each(self.snapshots(), function(snapshotIndex, snapshot){
-                    if (snapshot.age() === age) {
-                        for (var year = 0; year < maxYears; year++) {
-                            var valueAfterYear = Round(snapshot.valueAfterYears(year));
-                            series.push([snapshot.age() + year, valueAfterYear]);
-
-                            if (valueAfterYear > snapshot.requiredRetirementAmount() && year + 10 < maxYears)
-                                maxYears = year + 10;
-                        }
+                    if ( ageIndex !== self.snapshotAges().length -1 ) {
+                        var nextAge = self.snapshotAges()[ageIndex + 1];
+                        maxYears = nextAge - age;
                     }
+
+                    $.each(self.snapshots(), function(snapshotIndex, snapshot){
+                        if (snapshot.age() === age) {
+                            for (var year = 0; year < maxYears; year++) {
+                                var valueAfterYear = Round(snapshot.valueAfterYears(year));
+                                series.push([snapshot.age() + year, valueAfterYear]);
+
+                                if (valueAfterYear > snapshot.requiredRetirementAmount() && year + 10 < maxYears)
+                                    maxYears = year + 10;
+                            }
+                        }
+                    });
                 });
-            });
+            }else{
+                var maxYears = 50;
+                for (var year = 0; year < maxYears; year++) {
+                    var valueAfterYear = Round(self.simpleValueAfterYears(year));
+                    series.push(valueAfterYear);
+
+                    if (valueAfterYear > self.simpleRequiredRetirementAmount() && year + 10 < maxYears)
+                        maxYears = year + 10;
+                }
+            }
             
             return series;
         });
@@ -200,22 +227,28 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         self.requiredPortfolioSeries = ko.computed(function() {
             var series = [];
 
-            $.each(self.snapshotAges(), function(ageIndex, age) {
-                var maxYears = self.retirementAccountSeries().length - series.length;
+            if(self.isAdvanced()){
+                $.each(self.snapshotAges(), function(ageIndex, age) {
+                    var maxYears = self.retirementAccountSeries().length - series.length;
 
-                if ( ageIndex !== self.snapshotAges().length -1 ) {
-                    var nextAge = self.snapshotAges()[ageIndex + 1];
-                    maxYears = nextAge - age;
-                }
-
-                $.each(self.snapshots(), function(snapshotIndex, snapshot){
-                    if (snapshot.age() === age) {
-                        for (var years = 0; years < maxYears; years++) {
-                            series.push([snapshot.age() + years, Round(snapshot.requiredRetirementAmount())]);
-                        }
+                    if ( ageIndex !== self.snapshotAges().length -1 ) {
+                        var nextAge = self.snapshotAges()[ageIndex + 1];
+                        maxYears = nextAge - age;
                     }
+
+                    $.each(self.snapshots(), function(snapshotIndex, snapshot){
+                        if (snapshot.age() === age) {
+                            for (var years = 0; years < maxYears; years++) {
+                                series.push([snapshot.age() + years, Round(snapshot.requiredRetirementAmount())]);
+                            }
+                        }
+                    });
                 });
-            });
+            }else{
+                for (var years = 0; years < self.retirementAccountSeries().length; years++) {
+                    series.push(Round(self.simpleRequiredRetirementAmount()));
+                }
+            }
 
             return series;
         });
@@ -272,6 +305,16 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
             }
         }
 
+        // Returns the chart's xAxis title, based on the context.
+        function xAxisTitle() {
+            if(self.isAdvanced()) {
+                return 'Age';
+            }
+            else {
+                return 'Years from Today';
+            }
+        }
+
         // Creates the chart.
         $(function () { 
             $('#container').highcharts({
@@ -288,7 +331,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 },
                 xAxis: {
                     title: {
-                        text: 'Years from Today'
+                        text: xAxisTitle()
                     }
                 },
                 series: [
@@ -303,11 +346,13 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 ],
                 tooltip: {
                     formatter: function() {
-                        var returnString = 'Year: ' + this.x + '<br/>';
-                        if(self.isAdvanced())
+                        if(self.isAdvanced()) {
+                            var returnString = 'Age: ' + this.x + '<br/>';
                             return returnString.concat(this.series.name + ': $' + this.y);
-                        else
-                            return returnString.concat(this.series.name + ': ' + this.y + '%');
+                        }
+
+                        var returnString = 'Year: ' + this.x + '<br/>';
+                        return returnString.concat(this.series.name + ': ' + this.y + '%');
                     }
                 }
             });
