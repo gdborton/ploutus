@@ -33,22 +33,103 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         }]);
 
         self.snapshots.subscribe(function(newArray) {
-            $.each(self.snapshots(), function(index, element) {
+            $.each(self.snapshots(), function(index, snapshot) {
 
-                element.panelTitle = ko.computed(function(){
-                    return "Age: " + element.age();
+                snapshot.panelTitle = ko.computed(function(){
+                    return "Age: " + snapshot.age();
                 });
 
-                element.panelCollapseText = ko.computed(function() {
-                    if (element.isExpanded())
+                snapshot.panelCollapseText = ko.computed(function() {
+                    if (snapshot.isExpanded())
                         return "Collapse";
                     return "Expand";
                 });
 
-                element.togglePanel = function() {
-                    element.isExpanded(!element.isExpanded());
+                snapshot.togglePanel = function() {
+                    snapshot.isExpanded(!snapshot.isExpanded());
+                };
+
+                // Calculates the net income after 401k contributions.
+                snapshot.netIncome = ko.computed(function() {
+                    var taxableIncome = (snapshot.grossIncome() - snapshot._401k() );
+                    var returnValue = 0;
+
+                    $.each(snapshot.filingStatus().brackets, function(index, bracket){
+                        if(taxableIncome >= bracket.max) {
+                            returnValue += (bracket.max - bracket.min) * (1 - bracket.rate);
+                        } else {
+                            returnValue += (taxableIncome - bracket.min) * (1 - bracket.rate);
+                            return false; // Breaks the jQuery loop.
+                        }
+                    });
+
+                    return Round(returnValue);
+                });
+
+                // Calculates the yearly spend based on income not saved.
+                snapshot.yearlySpend = ko.computed(function() {
+                    return Round(snapshot.netIncome() - snapshot.roth() - snapshot.afterTax());
+                });
+
+                // Calculates the monthly spend based on income not saved.
+                snapshot.monthlySpend = ko.computed(function() {
+                    return Round(snapshot.yearlySpend() / 12);
+                });
+
+                // Calculates the weekly spend based on income not saved.
+                snapshot.weeklySpend = ko.computed(function() {
+                    return Round(snapshot.monthlySpend() / 4);
+                });
+
+                // Calculates the daily spend based on inceom not saved.
+                snapshot.dailySpend = ko.computed(function() {
+                    return Round(snapshot.monthlySpend() / 30.4);
+                });
+
+                // Calculates the sum of the years investments.
+                snapshot.yearlyInvestment = ko.computed(function() {
+                    return Round(+snapshot._401k() + +snapshot.roth() + +snapshot.afterTax());
+                });
+
+                // Returns the required retirement portfolio value.
+                snapshot.requiredRetirementAmount = function() {
+                    if (self.isAdvanced())
+                        return snapshot.yearlySpend() / (self.safeWithdrawalRate() / 100);
+
+                    return (100 - self.simpleSavingsRate()) / 0.04;
+                };
+
+                //  Returns the value of the retirement accounts after a specified number of years.
+                //  Math for this method found at http://www.moneychimp.com/articles/finworks/fmbasinv.htm
+                snapshot.valueAfterYears = function (years) {
+                    var p = 0;
+                    var r = 0.07;
+                    var c = self.simpleSavingsRate();
+
+                    if(self.isAdvanced()) {
+                        p = +snapshot.principal();
+                        r = +self.returnRate()/100;
+                        c = +snapshot.yearlyInvestment();
+                    }
+
+                    var z = 1+r;
+
+                    return (p * Math.pow(z, years)) + c * ( (Math.pow(z, (years+1)) - z) / r);
                 }
+
             });
+        });
+
+        self.snapshotAges = ko.computed(function(){
+            var sortedArray = [];
+            var snapshots = self.snapshots();
+            $.each(snapshots, function(index, snapshot){
+                sortedArray.push(snapshot.age());
+            });
+
+            sortedArray.sort(function(a, b) { return a - b; })
+            debugger;
+            return sortedArray;
         });
 
         self.snapshots.valueHasMutated(); // Calls subscribe function before the view loads to attach events.
@@ -74,56 +155,6 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
             self.isAdvanced(true);
         };
 
-        // Calculates the net income after 401k contributions.
-        self.netIncome = ko.computed(function() {
-            var taxableIncome = (self.snapshots()[0].grossIncome() - self.snapshots()[0]._401k() );
-            var returnValue = 0;
-            
-            $.each(self.snapshots()[0].filingStatus().brackets, function(index, bracket){
-                if(taxableIncome >= bracket.max) {
-                    returnValue += (bracket.max - bracket.min) * (1 - bracket.rate);
-                } else {
-                    returnValue += (taxableIncome - bracket.min) * (1 - bracket.rate);
-                    return false; // Breaks the jQuery loop.
-                }
-            });
-            
-            return Round(returnValue);
-        });
-
-        // Calculates the yearly spend based on income not saved.
-        self.yearlySpend = ko.computed(function() {
-            return Round(self.netIncome() - self.snapshots()[0].roth() - self.snapshots()[0].afterTax());
-        });
-
-        // Calculates the monthly spend based on income not saved.
-        self.monthlySpend = ko.computed(function() {
-            return Round(self.yearlySpend() / 12);
-        });
-
-        // Calculates the weekly spend based on income not saved.
-        self.weeklySpend = ko.computed(function() {
-            return Round(self.monthlySpend() / 4);
-        });
-
-        // Calculates the daily spend based on inceom not saved.
-        self.dailySpend = ko.computed(function() {
-            return Round(self.monthlySpend() / 30.4);
-        });
-
-        // Calulates the sum of the years investments.
-        self.yearlyInvestment = ko.computed(function() {
-            return Round(+self.snapshots()[0]._401k() + +self.snapshots()[0].roth() + +self.snapshots()[0].afterTax());
-        });
-        
-        // Returns the required retirement portfolio value.
-        self.requiredRetirementAmount = function() {
-            if (self.isAdvanced())
-                return self.yearlySpend() / (self.safeWithdrawalRate() / 100);
-
-            return (100 - self.simpleSavingsRate()) / 0.04;
-        };
-
         // Pushes a new snapshot onto the snapshot array.
         self.newSnapshot = function(){
             var lastSnapshot = self.snapshots()[self.snapshots().length - 1]; // The last snapshot in the list.
@@ -140,15 +171,27 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         // Defaults to 50 years, but decreases to FI + 10 when the FI year is found.
         self.retirementAccountSeries = ko.computed(function() {
             var series = [];
-            var maxYears = 50;
-            
-            for (var year = 0; year < maxYears; year++) {
-                var valueAfterYear = Round(valueAfterYears(year));
-                series.push(valueAfterYear);
-                
-                if (valueAfterYear > self.requiredRetirementAmount() && year + 10 < maxYears)
-                    maxYears = year + 10;
-            }
+
+            $.each(self.snapshotAges(), function(ageIndex, age) {
+                var maxYears = 50;
+
+                if ( ageIndex !== self.snapshotAges().length -1 ) {
+                    var nextAge = self.snapshotAges()[ageIndex + 1];
+                    maxYears = nextAge - age;
+                }
+
+                $.each(self.snapshots(), function(snapshotIndex, snapshot){
+                    if (snapshot.age() === age) {
+                        for (var year = 0; year < maxYears; year++) {
+                            var valueAfterYear = Round(snapshot.valueAfterYears(year));
+                            series.push([snapshot.age() + year, valueAfterYear]);
+
+                            if (valueAfterYear > snapshot.requiredRetirementAmount() && year + 10 < maxYears)
+                                maxYears = year + 10;
+                        }
+                    }
+                });
+            });
             
             return series;
         });
@@ -156,11 +199,24 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         // Returns the series that represents the required retirement portfolio amount.
         self.requiredPortfolioSeries = ko.computed(function() {
             var series = [];
-            
-            for (var i = 0; i < self.retirementAccountSeries().length; i++) {
-                series.push(Round(self.requiredRetirementAmount()));
-            }
-            
+
+            $.each(self.snapshotAges(), function(ageIndex, age) {
+                var maxYears = self.retirementAccountSeries().length - series.length;
+
+                if ( ageIndex !== self.snapshotAges().length -1 ) {
+                    var nextAge = self.snapshotAges()[ageIndex + 1];
+                    maxYears = nextAge - age;
+                }
+
+                $.each(self.snapshots(), function(snapshotIndex, snapshot){
+                    if (snapshot.age() === age) {
+                        for (var years = 0; years < maxYears; years++) {
+                            series.push([snapshot.age() + years, Round(snapshot.requiredRetirementAmount())]);
+                        }
+                    }
+                });
+            });
+
             return series;
         });
         
@@ -176,6 +232,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         
         // Returns the number of years until user is able to retire.
         self.yearsTillIndependent = ko.computed(function() {
+            return 0;
             var retirementYear = 100;
             $.each(self.retirementAccountSeries(), function(index, value) {
                 if (value > self.requiredRetirementAmount()) {
@@ -185,25 +242,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
             });
             return retirementYear;
         });
-        
-        //  Returns the value of the retirement accounts after a specified number of years.
-        //  Math for this method found at http://www.moneychimp.com/articles/finworks/fmbasinv.htm
-        function valueAfterYears(years) {
-            var p = 0;
-            var r = 0.07;
-            var c = self.simpleSavingsRate();
 
-            if(self.isAdvanced()) {
-                p = +self.snapshots()[0].principal();
-                r = +self.returnRate()/100;
-                c = +self.yearlyInvestment();
-            }
-            
-            var z = 1+r;
-            
-            return (p * Math.pow(z, years)) + c * ( (Math.pow(z, (years+1)) - z) / r);
-        }
-        
         // Rounds a number to a max of two decimal places.
         function Round(number) {
             return Math.round(number * 100) / 100;
