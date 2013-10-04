@@ -7,6 +7,11 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         self.safeWithdrawalRate = ko.observable(4);
         self.isAdvanced = ko.observable(false);
         self.filingStatuses = ko.observable(taxBrackets);
+        self.simpleSavingsRate = ko.observable(10);
+
+        self.isAdvanced.subscribe(function(newValue) {
+            $('#container').highcharts().yAxis[0].axisTitle.attr({text: yAxisTitle()});
+        });
 
         self.ages = ko.computed(function() {
             var ages = [];
@@ -104,7 +109,10 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         
         // Returns the required retirement portfolio value.
         self.requiredRetirementAmount = function() {
-            return self.yearlySpend() / (self.safeWithdrawalRate() / 100);
+            if (self.isAdvanced())
+                return self.yearlySpend() / (self.safeWithdrawalRate() / 100);
+
+            return (100 - self.simpleSavingsRate()) / 0.04;
         };
 
         // Pushes a new snapshot onto the snapshot array.
@@ -166,9 +174,15 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         //  Returns the value of the retirement accounts after a specified number of years.
         //  Math for this method found at http://www.moneychimp.com/articles/finworks/fmbasinv.htm
         function valueAfterYears(years) {
-            p = +self.snapshots()[0].principal();
-            r = +self.returnRate()/100;
-            c = +self.yearlyInvestment();
+            var p = 0;
+            var r = 0.07;
+            var c = self.simpleSavingsRate();
+
+            if(self.isAdvanced()) {
+                p = +self.snapshots()[0].principal();
+                r = +self.returnRate()/100;
+                c = +self.yearlyInvestment();
+            }
             
             var z = 1+r;
             
@@ -193,7 +207,17 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 isExpanded: ko.observable(true)
             };
         }
-        
+
+        // Returns the chart yAxis title, based on the context.
+        function yAxisTitle() {
+            if(self.isAdvanced()) {
+                return 'Value in Dollars';
+            }
+            else {
+                return 'Percent of Gross Income';
+            }
+        }
+
         // Creates the chart.
         $(function () { 
             $('#container').highcharts({
@@ -205,7 +229,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 },
                 yAxis: {
                     title: {
-                        text: "Value in Dollars"
+                        text: yAxisTitle()
                     }
                 },
                 xAxis: {
@@ -226,7 +250,10 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 tooltip: {
                     formatter: function() {
                         var returnString = 'Year: ' + this.x + '<br/>';
-                        return returnString.concat(this.series.name + ': $' + this.y);
+                        if(self.isAdvanced())
+                            return returnString.concat(this.series.name + ': $' + this.y);
+                        else
+                            return returnString.concat(this.series.name + ': ' + this.y + '%');
                     }
                 }
             });

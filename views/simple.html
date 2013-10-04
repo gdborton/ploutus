@@ -1,69 +1,9 @@
-<form class="form-inline">
-    <fieldset>
-        <div class="row">
-            <div class="col-lg-3">
-                <label class="control-label" for="age">Age</label>
-                <select class="form-control" id="age" data-bind="options: ages, value: firstSnap.age"></select>
-            </div>
-            <div class="col-lg-3">
-                <label class="control-label" for="filing-status">Filing Status</label>
-                <select class="form-control" id="filing-status"
-                        data-bind="options: filingStatuses, optionsText: 'display', value: firstSnap.filingStatus">
-                </select>
-            </div>
-            <div class="col-lg-3">
-                <label class="control-label" for="gross-income">Gross Income</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input class="form-control" id="gross-income" type="text" data-bind="value: firstSnap.grossIncome" />
-                </div>
-            </div>
+<div class="row">
+    <div class="col-lg-3">
+        <label class="control-label">Percent of gross income invested:</label>
+        <div class="input-group">
+            <input class="form-control" type="range" min="0" max="100" data-bind="value: simpleSavingsRate" />
+            <span class="input-group-addon" data-bind="text: simpleSavingsRate() + '%' ">%</span>
         </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <label class="control-label" for="401k">401k contribution amount</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input class="form-control" id="401k" type="text" data-bind="value: firstSnap._401k" />
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <label class="control-label" for="roth">Roth IRA Contribution</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input class="form-control" id="roth" type="text" data-bind="value: firstSnap.roth" />
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <label class="control-label" for="after-tax">After tax contributions</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input class="form-control" id="after-tax" type="text" data-bind="value: firstSnap.afterTax" />
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <label class="control-label" for="principal">Current retirement portfolio value</label>
-                <div class="input-group">
-                    <span class="input-group-addon">$</span>
-                    <input class="form-control" id="principal" type="text" data-bind="value: firstSnap.principal" />
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <label class="control-label" for="sfr">Est. safe withdrawal rate</label>
-                <div class="input-group">
-                    <input class="form-control" id="sfr" type="text" data-bind="value: safeWithdrawalRate"/>
-                    <span class="input-group-addon">%</span>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <label class="control-label" for="return-rate">Rate of return</label>
-                <div class="input-group">
-                    <input class="form-control" id="return-rate" type="text" data-bind="value: returnRate"/>
-                    <span class="input-group-addon">%</span>
-                </div>
-            </div>
-        </div>
-    </fieldset>
-</form>
+    </div>
+</div>
