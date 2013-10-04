@@ -3,7 +3,7 @@
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title pull-left" data-bind="text: panelTitle"></h3>
-            <span class="pull-right" data-bind="text: panelCollapseText, click: togglePanel"></span>
+            <span class="pull-right clickable" data-bind="text: panelCollapseText, click: togglePanel"></span>
             <div class="clearfix"></div>
         </div>
         <div class="panel-body" data-bind="visible: isExpanded">
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="col-lg-offset-3 col-lg-3">
-                        <button type="button" class="btn label-offset"
+                        <button type="button" class="btn btn-danger label-offset"
                                 data-bind="click: $parent.deleteSnapshot, visible: $parent.isDeleteVisible">
                             Delete this financial snapshot
                         </button>

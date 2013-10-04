@@ -6,3 +6,7 @@
 .label-offset {
     margin-top: 24px;
 }
+
+.clickable {
+    cursor: pointer;
+}
