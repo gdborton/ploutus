@@ -262,19 +262,6 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
         self.requiredPortfolioSeries.subscribe(function(newValue) {
             $('#container').highcharts().series[1].setData(newValue);
         });
-        
-        // Returns the number of years until user is able to retire.
-        self.yearsTillIndependent = ko.computed(function() {
-            return 0;
-            var retirementYear = 100;
-            $.each(self.retirementAccountSeries(), function(index, value) {
-                if (value > self.requiredRetirementAmount()) {
-                    retirementYear = index;
-                    return false; // escapes the .each() loop.
-                }
-            });
-            return retirementYear;
-        });
 
         // Rounds a number to a max of two decimal places.
         function Round(number) {
@@ -314,6 +301,52 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
                 return 'Years from Today';
             }
         }
+
+        self.snapshotWeightedAverage = function(field){
+            var totalYears = self.retirementAccountSeries().length;
+            var yearsAccountedFor = 0;
+            var totalField = 0;
+
+            $.each(self.snapshotAges(), function(ageIndex, age){
+                var ageYears = totalYears - yearsAccountedFor;
+                if ( ageIndex !== self.snapshotAges().length -1 ) {
+                    var nextAge = self.snapshotAges()[ageIndex + 1];
+                    ageYears = nextAge - age;
+                    yearsAccountedFor = yearsAccountedFor + ageYears;
+                }
+
+                $.each(self.snapshots(), function(snapshotIndex, snapshot){
+                    if(snapshot.age() === age) {
+                        totalField = totalField + (snapshot[field]() * ageYears);
+                    }
+                });
+            });
+            return Round(totalField/totalYears);
+        };
+
+        self.netIncome = ko.computed(function(){
+            return self.snapshotWeightedAverage('netIncome');
+        });
+
+        self.yearlySpend = ko.computed(function() {
+            return self.snapshotWeightedAverage('yearlySpend');
+        });
+
+        self.monthlySpend = ko.computed(function() {
+            return self.snapshotWeightedAverage('monthlySpend');
+        });
+
+        self.weeklySpend = ko.computed(function() {
+            return self.snapshotWeightedAverage('weeklySpend');
+        });
+
+        self.dailySpend = ko.computed(function() {
+            return self.snapshotWeightedAverage('dailySpend');
+        });
+
+        self.yearlyInvestment = ko.computed(function() {
+            return self.snapshotWeightedAverage('yearlyInvestment');
+        });
 
         // Creates the chart.
         $(function () { 
