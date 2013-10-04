@@ -53,12 +53,15 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
 
         self.snapshots.valueHasMutated(); // Calls subscribe function before the view loads to attach events.
 
+        // Returns whether or not the delete snapshot button should be visible.
+        // True if there is currently more than one snapshot, false otherwise.
         self.isDeleteVisible = ko.computed(function() {
             if (self.snapshots().length > 1)
                 return true;
             return false;
         });
 
+        // Returns the first snapshot in the snapshot array.
         self.firstSnap = ko.observable(self.snapshots()[0]);
 
         // Shows the simple view to the user.
@@ -127,6 +130,7 @@ define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEng
             self.snapshots.push(cloneSnapshot(lastSnapshot));
         };
 
+        // Deletes a snapshot from the snapshot array.
         self.deleteSnapshot = function(snapshot) {
             var snapshotIndex = $.inArray(snapshot, self.snapshots());
             self.snapshots.splice(snapshotIndex, 1);
