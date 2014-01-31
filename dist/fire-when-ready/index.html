@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ploutus - Visualize your Financial Independence</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+              content="Ploutus is a financial independence tool, that helps you to vizualize the
+                       growth of your retirement portfolio.">
+        <meta name="keywords" content="Financial Indepence, retirement, retirement calculator">
+        <meta name="author" content="Gary Borton">
+        <script type="text/javascript" data-main="javascripts/main" src="javascripts/libraries/require.js"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m);
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            
+            ga('create', 'UA-40196134-2', 'ploutus.com');
+            ga('send', 'pageview');
+            
+            setTimeout(function() {
+            window.onscroll = function() {
+              window.onscroll = null; // Only track the event once
+              ga('send', 'event', 'page', 'scroll');
+            };
+            }, 5000);
+		</script>
+        <link href="stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="stylesheets/styles.css" rel="stylesheet" type="text/css">
+    </head>
+    <body id="body">
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Ploutus <small>Visualize your financial independence.</small></h1>
+            </div>
+            <div class="container">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="pull-right" style="height:0px">
+                            <a href="" data-bind="click: showSimple, css: { 'text-muted': !isAdvanced() }">Simple</a> |
+                            <a href="" data-bind="click: showAdvanced, css: { 'text-muted': isAdvanced() }">Advanced</a>
+                        </div>
+
+                        <legend>Financial Profile</legend>
+                        <div data-bind="template: { name: 'views/simple' }, visible: !isAdvanced() "></div>
+                        <div data-bind="template: { name: 'views/advanced' }, visible: isAdvanced() "></div>
+                    </div>
+                </div>
+                
+                <div class="panel panel-default" data-bind="visible: isAdvanced()">
+                    <div class="panel-body" data-bind="template: { name: 'views/quick_facts' }">
+                    </div>
+                </div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <legend>Portfolio Growth</legend>
+                        <div id="container" style="width:100%; height:400px;"></div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body" data-bind="template: { name: 'views/assumptions' }"></div>
+                </div>
+
+            </div>
+            <div class="footer">
+                <div class="row">
+                    <span>Designed and maintained by <a href="http://www.garyborton.com" target="_blank">Gary Borton</a></span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

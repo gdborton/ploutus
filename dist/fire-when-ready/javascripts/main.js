@@ -1,0 +1,1 @@
+require.config({baseUrl:".",paths:{lib:"../bower_components",highcharts:"../bower_components/highcharts",bootstrap:"../bower_components/bootstrap.min"},shim:{highcharts:{exports:"Highcharts",deps:["lib/jquery"]},bootstrap:{deps:["lib/jquery"]}}}),require(["lib/koExternalTemplateEngine_all.min","viewModels/appViewModel"],function(){});

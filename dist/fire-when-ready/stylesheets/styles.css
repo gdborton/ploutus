@@ -1,0 +1,25 @@
+.footer {
+    height: 50px;
+    color: #fff;
+    text-align: center;
+}
+.label-offset {
+    margin-top: 24px;
+}
+.clickable {
+    cursor: pointer;
+}
+h1 {
+    font-size: 70px;
+    font-family: league;
+}
+h1 small {
+    font-size: 38px;
+}
+@font-face {
+    font-family: league;
+    src: url('/static/fonts/LeagueGothic-Regular.otf') format("opentype");
+}
+body {
+    background: url('/static/images/debut_dark.png');
+}
