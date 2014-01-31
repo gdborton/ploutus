@@ -1,0 +1,14 @@
+{
+  "name": "knockoutjs",
+  "homepage": "https://github.com/knockout/knockout",
+  "version": "2.3.0",
+  "_release": "2.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.3.0",
+    "commit": "f2f4e724167d92a15a8f40dad3c71bda5ccd8b04"
+  },
+  "_source": "git://github.com/knockout/knockout.git",
+  "_target": "~2.3.0",
+  "_originalSource": "knockoutjs"
+}

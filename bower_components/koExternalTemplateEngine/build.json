@@ -1,0 +1,11 @@
+{
+    "source": "src",
+    "output": "lib",
+    "lint": {},
+    "uglify": {},
+    "extensions": { "uglify": "min" },
+    "host": true,
+    "hosts" : {
+        "/" : "./"
+    }
+}
