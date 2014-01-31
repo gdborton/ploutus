@@ -1,5 +1,5 @@
 // Main viewmodel class
-define(['lib/knockout', 'tax_brackets', 'highcharts', 'lib/koExternalTemplateEngine_all.min', 'bootstrap'], function(ko, taxBrackets) {
+define(['ko', 'fire-when-ready/javascripts/tax_brackets', 'highcharts', 'KOE','bootstrap'], function(ko, taxBrackets) {
     function appViewModel() {
         var self = this;
 

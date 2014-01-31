@@ -14,3 +14,16 @@ fire-when-ready/stylesheets/bootstrap.min.css
 fire-when-ready/stylesheets/styles.css
 ----------------
 fire-when-ready/stylesheets/styles.css
+
+fire-when-ready/javascripts/main.js
+----------------
+/home/gborton/code/ploutus/bower_components/knockout/knockout.js
+fire-when-ready/javascripts/tax_brackets.js
+/home/gborton/code/ploutus/bower_components/jquery/jquery.js
+/home/gborton/code/ploutus/bower_components/highcharts/highcharts.js
+/home/gborton/code/ploutus/bower_components/TrafficCop/lib/amd/TrafficCop.js
+/home/gborton/code/ploutus/bower_components/infuser/lib/infuser-amd.js
+/home/gborton/code/ploutus/bower_components/koExternalTemplateEngine/lib/koExternalTemplateEngine-amd.js
+/home/gborton/code/ploutus/bower_components/bootstrap/dist/js/bootstrap.js
+fire-when-ready/javascripts/viewModels/appViewModel.js
+fire-when-ready/javascripts/main.js

@@ -1,0 +1,13 @@
+{
+  "name": "TrafficCop",
+  "homepage": "https://github.com/ifandelse/TrafficCop",
+  "_release": "67537edd71",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "67537edd714b3d4b64d5ffc0002dd9460e970ede"
+  },
+  "_source": "git://github.com/ifandelse/TrafficCop.git",
+  "_target": "*",
+  "_originalSource": "ifandelse/TrafficCop"
+}
