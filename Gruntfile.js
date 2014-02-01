@@ -5,9 +5,21 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-clean');
 
+    grunt.loadNpmTasks('grunt-contrib-less');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        clean: ['dist/fire-when-ready'],
+        clean: {
+            less: ['dist/css/*.less']
+        },
+        less: {
+            compile: {
+                sourceMap: true,
+                files: {
+                    'dist/css/styles.css': 'dist/css/styles.less'
+                }
+            }
+        },
 		requirejs: {
 			compile: {
 				options: {
@@ -15,6 +27,7 @@ module.exports = function (grunt) {
 					mainConfigFile: 'src/fire-when-ready/javascripts/main.js',
 					dir: 'dist/',
 					optimize: 'uglify2',
+                    optimizeCss: 'none',
                     paths: {
                         'requireLib': '../bower_components/requirejs/require'
                     },
@@ -30,5 +43,5 @@ module.exports = function (grunt) {
 		}
     });
 
-    grunt.registerTask('default', ['clean', 'requirejs:compile']);
+    grunt.registerTask('default', ['requirejs:compile', 'less:compile', 'clean:less']);
 };
