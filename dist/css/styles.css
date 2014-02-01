@@ -1,336 +1,3 @@
-@font-face {
-  font-family: league;
-  src: url('/static/fonts/LeagueGothic-Regular.otf') format("opentype");
-}
-* {
-  margin: 0;
-  padding: 0;
-}
-html,
-body {
-  height: 100%;
-}
-body {
-  font: 13.34px Helvetica, Arial, sans-serif;
-  font-size: small;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: 100%;
-}
-h1 {
-  margin-bottom: 1em;
-  font-size: 70px;
-  font-family: league;
-}
-h1 small {
-  font-size: 38px;
-}
-p {
-  margin: 1em 0;
-}
-a {
-  color: #00a;
-}
-a:hover {
-  color: #000;
-}
-a:visited {
-  color: #a0a;
-}
-.posts {
-  list-style-type: none;
-  margin-bottom: 2em;
-}
-.posts li {
-  line-height: 1.75em;
-}
-.posts span {
-  color: #aaa;
-  font-family: Monaco, "Courier New", monospace;
-  font-size: 80%;
-}
-.site {
-  font-size: 115%;
-  text-align: justify;
-  width: 42em;
-  margin: 3em auto 2em;
-  line-height: 1.5em;
-}
-.header a {
-  font-weight: bold;
-  text-decoration: none;
-}
-.header a.extra {
-  color: #aaa;
-  margin-left: 1em;
-}
-.header a.extra:hover {
-  color: #000;
-}
-.title {
-  display: inline-block;
-  margin-bottom: 2em;
-}
-.title a {
-  color: #a00;
-}
-.title a:hover {
-  color: #000;
-}
-.meta {
-  color: #aaa;
-}
-.fooater {
-  font-size: 80%;
-  color: #666;
-  border-top: 4px solid #eee;
-  margin-top: 2em;
-  overflow: hidden;
-}
-.fooater .contact {
-  float: left;
-  margin-right: 3em;
-}
-.fooater .contact a {
-  color: #8085C1;
-}
-.fooater .rss {
-  margin-top: 1.1em;
-  margin-right: -0.2em;
-  float: right;
-}
-.fooater .rss img {
-  border: 0;
-}
-div.footer {
-  height: 50px;
-  text-align: center;
-}
-.post pre {
-  border: 1px solid #ddd;
-  background-color: #eef;
-  padding: 0 .4em;
-}
-.post pre code {
-  border: none;
-}
-.post code {
-  border: 1px solid #ddd;
-  background-color: #eef;
-  padding: 0 .2em;
-}
-.post pre.terminal {
-  border: 1px solid #000;
-  background-color: #333;
-  color: #FFF;
-}
-.post pre.terminal code {
-  background-color: #333;
-}
-.post ul,
-.post ol {
-  margin-left: 1.35em;
-}
-.highlight code {
-  background: #ffffff;
-}
-.highlight code .c {
-  color: #999988;
-  font-style: italic;
-}
-.highlight code .err {
-  color: #a61717;
-  background-color: #e3d2d2;
-}
-.highlight code .k {
-  font-weight: bold;
-}
-.highlight code .o {
-  font-weight: bold;
-}
-.highlight code .cm {
-  color: #999988;
-  font-style: italic;
-}
-.highlight code .cp {
-  color: #999999;
-  font-weight: bold;
-}
-.highlight code .c1 {
-  color: #999988;
-  font-style: italic;
-}
-.highlight code .cs {
-  color: #999999;
-  font-weight: bold;
-  font-style: italic;
-}
-.highlight code .gd {
-  color: #000000;
-  background-color: #ffdddd;
-}
-.highlight code .gd .x {
-  color: #000000;
-  background-color: #ffaaaa;
-}
-.highlight code .ge {
-  font-style: italic;
-}
-.highlight code .gr {
-  color: #aa0000;
-}
-.highlight code .gh {
-  color: #999999;
-}
-.highlight code .gi {
-  color: #000000;
-  background-color: #ddffdd;
-}
-.highlight code .gi .x {
-  color: #000000;
-  background-color: #aaffaa;
-}
-.highlight code .go {
-  color: #888888;
-}
-.highlight code .gp {
-  color: #555555;
-}
-.highlight code .gs {
-  font-weight: bold;
-}
-.highlight code .gu {
-  color: #aaaaaa;
-}
-.highlight code .gt {
-  color: #aa0000;
-}
-.highlight code .kc {
-  font-weight: bold;
-}
-.highlight code .kd {
-  font-weight: bold;
-}
-.highlight code .kp {
-  font-weight: bold;
-}
-.highlight code .kr {
-  font-weight: bold;
-}
-.highlight code .kt {
-  color: #445588;
-  font-weight: bold;
-}
-.highlight code .m {
-  color: #009999;
-}
-.highlight code .s {
-  color: #dd1144;
-}
-.highlight code .na {
-  color: #008080;
-}
-.highlight code .nb {
-  color: #0086b3;
-}
-.highlight code .nc {
-  color: #445588;
-  font-weight: bold;
-}
-.highlight code .no {
-  color: #008080;
-}
-.highlight code .ni {
-  color: #800080;
-}
-.highlight code .ne {
-  color: #990000;
-  font-weight: bold;
-}
-.highlight code .nf {
-  color: #990000;
-  font-weight: bold;
-}
-.highlight code .nn {
-  color: #555555;
-}
-.highlight code .nt {
-  color: #000080;
-}
-.highlight code .nv {
-  color: #008080;
-}
-.highlight code .ow {
-  font-weight: bold;
-}
-.highlight code .w {
-  color: #bbbbbb;
-}
-.highlight code .mf {
-  color: #009999;
-}
-.highlight code .mh {
-  color: #009999;
-}
-.highlight code .mi {
-  color: #009999;
-}
-.highlight code .mo {
-  color: #009999;
-}
-.highlight code .sb {
-  color: #dd1144;
-}
-.highlight code .sc {
-  color: #dd1144;
-}
-.highlight code .sd {
-  color: #dd1144;
-}
-.highlight code .s2 {
-  color: #dd1144;
-}
-.highlight code .se {
-  color: #dd1144;
-}
-.highlight code .sh {
-  color: #dd1144;
-}
-.highlight code .si {
-  color: #dd1144;
-}
-.highlight code .sx {
-  color: #dd1144;
-}
-.highlight code .sr {
-  color: #009926;
-}
-.highlight code .s1 {
-  color: #dd1144;
-}
-.highlight code .ss {
-  color: #990073;
-}
-.highlight code .bp {
-  color: #999999;
-}
-.highlight code .vc {
-  color: #008080;
-}
-.highlight code .vg {
-  color: #008080;
-}
-.highlight code .vi {
-  color: #008080;
-}
-.highlight code .il {
-  color: #009999;
-}
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
@@ -6150,4 +5817,302 @@ td.visible-print {
   td.hidden-print {
     display: none !important;
   }
+}
+@font-face {
+  font-family: league;
+  src: url('/static/fonts/LeagueGothic-Regular.otf') format("opentype");
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  font: 13.34px Helvetica, Arial, sans-serif;
+  font-size: small;
+  padding-top: 70px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+h1 {
+  margin-bottom: 1em;
+  font-size: 70px;
+  font-family: league;
+}
+h1 small {
+  font-size: 38px;
+}
+p {
+  margin: 1em 0;
+}
+.posts {
+  list-style-type: none;
+  margin-bottom: 2em;
+}
+.posts li {
+  line-height: 1.75em;
+}
+.posts span {
+  color: #aaa;
+  font-family: Monaco, "Courier New", monospace;
+  font-size: 80%;
+}
+.site {
+  font-size: 115%;
+  text-align: justify;
+  width: 42em;
+  margin: 3em auto 2em;
+  line-height: 1.5em;
+}
+.title {
+  display: inline-block;
+  margin-bottom: 2em;
+}
+.title a {
+  color: #a00;
+}
+.title a:hover {
+  color: #000;
+}
+.meta {
+  color: #aaa;
+}
+div.footer {
+  height: 50px;
+  text-align: center;
+}
+.post pre {
+  border: 1px solid #ddd;
+  background-color: #eef;
+  padding: 0 .4em;
+}
+.post pre code {
+  border: none;
+}
+.post code {
+  border: 1px solid #ddd;
+  background-color: #eef;
+  padding: 0 .2em;
+}
+.post pre.terminal {
+  border: 1px solid #000;
+  background-color: #333;
+  color: #FFF;
+}
+.post pre.terminal code {
+  background-color: #333;
+}
+.post ul,
+.post ol {
+  margin-left: 1.35em;
+}
+.label-offset {
+  margin-top: 24px;
+}
+.clickable {
+  cursor: pointer;
+}
+.highlight code {
+  background: #ffffff;
+}
+.highlight code .c {
+  color: #999988;
+  font-style: italic;
+}
+.highlight code .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+.highlight code .k {
+  font-weight: bold;
+}
+.highlight code .o {
+  font-weight: bold;
+}
+.highlight code .cm {
+  color: #999988;
+  font-style: italic;
+}
+.highlight code .cp {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight code .c1 {
+  color: #999988;
+  font-style: italic;
+}
+.highlight code .cs {
+  color: #999999;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight code .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+.highlight code .gd .x {
+  color: #000000;
+  background-color: #ffaaaa;
+}
+.highlight code .ge {
+  font-style: italic;
+}
+.highlight code .gr {
+  color: #aa0000;
+}
+.highlight code .gh {
+  color: #999999;
+}
+.highlight code .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+.highlight code .gi .x {
+  color: #000000;
+  background-color: #aaffaa;
+}
+.highlight code .go {
+  color: #888888;
+}
+.highlight code .gp {
+  color: #555555;
+}
+.highlight code .gs {
+  font-weight: bold;
+}
+.highlight code .gu {
+  color: #aaaaaa;
+}
+.highlight code .gt {
+  color: #aa0000;
+}
+.highlight code .kc {
+  font-weight: bold;
+}
+.highlight code .kd {
+  font-weight: bold;
+}
+.highlight code .kp {
+  font-weight: bold;
+}
+.highlight code .kr {
+  font-weight: bold;
+}
+.highlight code .kt {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight code .m {
+  color: #009999;
+}
+.highlight code .s {
+  color: #dd1144;
+}
+.highlight code .na {
+  color: #008080;
+}
+.highlight code .nb {
+  color: #0086b3;
+}
+.highlight code .nc {
+  color: #445588;
+  font-weight: bold;
+}
+.highlight code .no {
+  color: #008080;
+}
+.highlight code .ni {
+  color: #800080;
+}
+.highlight code .ne {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight code .nf {
+  color: #990000;
+  font-weight: bold;
+}
+.highlight code .nn {
+  color: #555555;
+}
+.highlight code .nt {
+  color: #000080;
+}
+.highlight code .nv {
+  color: #008080;
+}
+.highlight code .ow {
+  font-weight: bold;
+}
+.highlight code .w {
+  color: #bbbbbb;
+}
+.highlight code .mf {
+  color: #009999;
+}
+.highlight code .mh {
+  color: #009999;
+}
+.highlight code .mi {
+  color: #009999;
+}
+.highlight code .mo {
+  color: #009999;
+}
+.highlight code .sb {
+  color: #dd1144;
+}
+.highlight code .sc {
+  color: #dd1144;
+}
+.highlight code .sd {
+  color: #dd1144;
+}
+.highlight code .s2 {
+  color: #dd1144;
+}
+.highlight code .se {
+  color: #dd1144;
+}
+.highlight code .sh {
+  color: #dd1144;
+}
+.highlight code .si {
+  color: #dd1144;
+}
+.highlight code .sx {
+  color: #dd1144;
+}
+.highlight code .sr {
+  color: #009926;
+}
+.highlight code .s1 {
+  color: #dd1144;
+}
+.highlight code .ss {
+  color: #990073;
+}
+.highlight code .bp {
+  color: #999999;
+}
+.highlight code .vc {
+  color: #008080;
+}
+.highlight code .vg {
+  color: #008080;
+}
+.highlight code .vi {
+  color: #008080;
+}
+.highlight code .il {
+  color: #009999;
 }
