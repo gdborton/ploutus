@@ -10,6 +10,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         clean: {
+            dist: ['dist'],
             less: ['dist/css/*.less']
         },
         less: {
@@ -43,5 +44,5 @@ module.exports = function (grunt) {
 		}
     });
 
-    grunt.registerTask('default', ['requirejs:compile', 'less:compile', 'clean:less']);
+    grunt.registerTask('default', ['clean:dist', 'requirejs:compile', 'less:compile', 'clean:less']);
 };
