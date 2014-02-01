@@ -5835,14 +5835,6 @@ body {
   font-size: small;
   padding-top: 70px;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: 100%;
-}
 h1 {
   margin-bottom: 1em;
   font-size: 70px;
@@ -5920,9 +5912,6 @@ div.footer {
 }
 .clickable {
   cursor: pointer;
-}
-.highlight code {
-  background: #ffffff;
 }
 .highlight code .c {
   color: #999988;
