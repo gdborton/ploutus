@@ -1,19 +1,13 @@
 module.exports = function (grunt) {
     'use strict';
 
-	//https://github.com/gruntjs/grunt-contrib-requirejs
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-	grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-		copy: {
-			requirejs: {
-				src: 'bower_components/requirejs/require.js',
-				dest: 'src/fire-when-ready/javascripts/require.js'
-			}
-		},
+        clean: ['dist/fire-when-ready'],
 		requirejs: {
 			compile: {
 				options: {
@@ -21,11 +15,20 @@ module.exports = function (grunt) {
 					mainConfigFile: 'src/fire-when-ready/javascripts/main.js',
 					dir: 'dist/',
 					optimize: 'uglify2',
-					modules: [{name: 'fire-when-ready/javascripts/main'}]
+                    paths: {
+                        'requireLib': '../bower_components/requirejs/require'
+                    },
+					modules: [
+                        {
+                            name: 'fire-when-ready/javascripts/main',
+                            include: ['fire-when-ready/javascripts/main', 'requireLib'],
+                            create: true
+                        }
+                    ]
 				}
 			}
 		}
     });
 
-    grunt.registerTask('default', ['copy:requirejs', 'requirejs:compile']);
+    grunt.registerTask('default', ['clean', 'requirejs:compile']);
 };
