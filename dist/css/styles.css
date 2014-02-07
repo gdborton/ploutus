@@ -5831,8 +5831,6 @@ body {
   height: 100%;
 }
 body {
-  font: 13.34px Helvetica, Arial, sans-serif;
-  font-size: small;
   padding-top: 70px;
 }
 h1 {
@@ -5876,11 +5874,20 @@ p {
   color: #000;
 }
 .meta {
+  margin-left: 20px;
   color: #aaa;
 }
 div.footer {
   height: 50px;
   text-align: center;
+}
+div.assumptions .definition {
+  padding-left: 10px;
+  border-top: 1px solid #ccc;
+}
+.post {
+  margin-left: 20px;
+  width: 750px;
 }
 .post pre {
   border: 1px solid #ddd;

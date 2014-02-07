@@ -2,8 +2,11 @@
 layout: default
 ---
 <h2>{{ page.title }}</h2>
-<p class="meta">{{ page.date | date_to_string }}</p>
+<div class="pull-left">
+    <p class="meta">{{ page.date | date_to_string }}</p>
+</div>
 
-<div class="post">
+<div class="post pull-left">
 {{ content }}
 </div>
+<div class="clearfix"></div>
