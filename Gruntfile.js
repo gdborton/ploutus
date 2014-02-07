@@ -25,7 +25,7 @@ module.exports = function (grunt) {
 			compile: {
 				options: {
 					appDir: 'src/',
-					mainConfigFile: 'src/fire-when-ready/javascripts/main.js',
+					mainConfigFile: 'src/static/javascripts/main.js',
 					dir: 'dist/',
 					optimize: 'uglify2',
                     optimizeCss: 'none',
@@ -34,8 +34,8 @@ module.exports = function (grunt) {
                     },
 					modules: [
                         {
-                            name: 'fire-when-ready/javascripts/main',
-                            include: ['fire-when-ready/javascripts/main', 'requireLib'],
+                            name: 'static/javascripts/main',
+                            include: ['static/javascripts/main', 'requireLib'],
                             create: true
                         }
                     ]

@@ -1,5 +1,8 @@
 // Main viewmodel class
 define(['ko', 'fire-when-ready/javascripts/tax_brackets', 'highcharts', 'KOE','bootstrap'], function(ko, taxBrackets) {
+
+
+
     function appViewModel() {
         var self = this;
 
@@ -9,7 +12,7 @@ define(['ko', 'fire-when-ready/javascripts/tax_brackets', 'highcharts', 'KOE','b
         self.filingStatuses = ko.observable(taxBrackets);
         self.simpleSavingsRate = ko.observable(10);
 
-        self.isAdvanced.subscribe(function(newValue) {
+        self.isAdvanced.subscribe(function() {
             $('#container').highcharts().yAxis[0].axisTitle.attr({text: yAxisTitle()});
             $('#container').highcharts().xAxis[0].axisTitle.attr({text: xAxisTitle()});
         });
@@ -392,6 +395,7 @@ define(['ko', 'fire-when-ready/javascripts/tax_brackets', 'highcharts', 'KOE','b
         });
         
     }
-    
-    ko.applyBindings(new appViewModel());
+    if($('#fire-when-ready-app').length > 0){
+        ko.applyBindings(new appViewModel(), $('#fire-when-ready-app')[0]);
+    }
 });

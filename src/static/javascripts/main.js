@@ -28,6 +28,6 @@ require.config({
     }
 });
 
-require(['viewModels/appViewModel'], function() {
+require(['../../fire-when-ready/javascripts/viewModels/appViewModel'], function() {
     
 });

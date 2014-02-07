@@ -1,5 +1,5 @@
 
-fire-when-ready/javascripts/main.js
+static/javascripts/main.js
 ----------------
 /home/gary/code/ploutus/bower_components/requirejs/require.js
 /home/gary/code/ploutus/bower_components/knockout/knockout.js
@@ -11,4 +11,4 @@ fire-when-ready/javascripts/tax_brackets.js
 /home/gary/code/ploutus/bower_components/koExternalTemplateEngine/lib/koExternalTemplateEngine-amd.js
 /home/gary/code/ploutus/bower_components/bootstrap/dist/js/bootstrap.js
 fire-when-ready/javascripts/viewModels/appViewModel.js
-fire-when-ready/javascripts/main.js
+static/javascripts/main.js
