@@ -5,8 +5,8 @@ date:   2014-02-06 22:57:59
 ---
 
 If you've visited the site before you'll notice that there have been some changes.  Moving forward, Ploutus will no
-longer be a simple retirement  graphing tool.  The plans for the site have expanded to become a small collection of
-tools all aimed at helping people understand their future retirement.
+longer be a single financial independence tool.  The plans for the site have expanded to become a collection of
+tools aimed at helping people understand financial independence.
 
 One of the changes already implemented is the move away from my previous host.  Ploutus is now hosted on
 [GitHub](https://www.github.com) for free.  It was a move that made sense considering GitHub provides support for

@@ -5886,7 +5886,7 @@ div.assumptions .definition {
 }
 .post {
   margin-left: 20px;
-  width: 750px;
+  max-width: 750px;
 }
 .post pre {
   border: 1px solid #ddd;

@@ -1,14 +1,14 @@
 
 static/javascripts/main.js
 ----------------
-/home/gary/code/ploutus/bower_components/requirejs/require.js
-/home/gary/code/ploutus/bower_components/knockout/knockout.js
+/home/gborton/code/ploutus/bower_components/requirejs/require.js
+/home/gborton/code/ploutus/bower_components/knockout/knockout.js
 fire-when-ready/javascripts/tax_brackets.js
-/home/gary/code/ploutus/bower_components/jquery/jquery.js
-/home/gary/code/ploutus/bower_components/highcharts/highcharts.js
-/home/gary/code/ploutus/bower_components/TrafficCop/lib/amd/TrafficCop.js
-/home/gary/code/ploutus/bower_components/infuser/lib/infuser-amd.js
-/home/gary/code/ploutus/bower_components/koExternalTemplateEngine/lib/koExternalTemplateEngine-amd.js
-/home/gary/code/ploutus/bower_components/bootstrap/dist/js/bootstrap.js
+/home/gborton/code/ploutus/bower_components/jquery/jquery.js
+/home/gborton/code/ploutus/bower_components/highcharts/highcharts.js
+/home/gborton/code/ploutus/bower_components/TrafficCop/lib/amd/TrafficCop.js
+/home/gborton/code/ploutus/bower_components/infuser/lib/infuser-amd.js
+/home/gborton/code/ploutus/bower_components/koExternalTemplateEngine/lib/koExternalTemplateEngine-amd.js
+/home/gborton/code/ploutus/bower_components/bootstrap/dist/js/bootstrap.js
 fire-when-ready/javascripts/viewModels/appViewModel.js
 static/javascripts/main.js
