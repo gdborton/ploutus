@@ -4,7 +4,7 @@ require.config({
         "lib": '../bower_components',
         "highcharts": "../bower_components/highcharts/highcharts",
         "bootstrap": "../bower_components/bootstrap/dist/js/bootstrap",
-		"viewModels": "fire-when-ready/javascripts/viewModels",
+		"firewhenready": "fire-when-ready/javascripts/viewModels/appViewModel",
 		"jQuery": "../bower_components/jquery/jquery",
 		"ko": "../bower_components/knockout/knockout",
 		"KOE": "../bower_components/koExternalTemplateEngine/lib/koExternalTemplateEngine-amd",
@@ -28,6 +28,6 @@ require.config({
     }
 });
 
-require(['../../fire-when-ready/javascripts/viewModels/appViewModel'], function() {
+require(['firewhenready'], function() {
     
 });
