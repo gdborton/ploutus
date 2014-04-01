@@ -1,0 +1,121 @@
+@font-face {
+  font-family: league;
+  src: url('/static/fonts/LeagueGothic-Regular.otf') format("opentype");
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  padding-top: 70px;
+}
+
+h1 {
+  margin-bottom: 1em;
+  font-size: 70px;
+  font-family: league;
+
+  small {
+    font-size: 38px;
+  }
+}
+
+p {
+  margin: 1em 0;
+}
+
+.posts {
+  list-style-type: none;
+  li {
+    line-height: 1.75em;
+  }
+  span {
+    color: #aaa;
+    font-family: Monaco, "Courier New", monospace;
+    font-size: 80%;
+  }
+}
+
+.site {
+  font-size: 115%;
+  text-align: justify;
+  width: 42em;
+  margin: 3em auto 2em;
+  line-height: 1.5em;
+}
+
+.title {
+  display: inline-block;
+  margin-bottom: 2em;
+  a {
+    color: #a00;
+  }
+  a:hover {
+    color: #000;
+  }
+}
+
+.meta {
+  margin-left: 20px;
+  color: #aaa;
+}
+
+div {
+  &.footer {
+    height: 50px;
+    text-align: center;
+  }
+
+  &.assumptions {
+    .definition {
+      padding-left: 10px;
+      border-top: 1px solid #ccc;
+    }
+  }
+}
+
+.post {
+  margin-left: 20px;
+  max-width: 750px;
+
+  pre {
+    border: 1px solid #ddd;
+    background-color: #eef;
+    padding: 0 .4em;
+
+    code {
+      border: none;
+    }
+  }
+  code {
+    border: 1px solid #ddd;
+    background-color: #eef;
+    padding: 0 .2em;
+  }
+  pre.terminal {
+    border: 1px solid #000;
+    background-color: #333;
+    color: #FFF;
+    code {
+      background-color: #333;
+    }
+  }
+  ul, ol {
+    margin-left: 1.35em;
+  }
+}
+
+.label-offset {
+  margin-top: 24px;
+}
+
+.clickable {
+  cursor: pointer;
+}
+

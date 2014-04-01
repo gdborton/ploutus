@@ -1,0 +1,13 @@
+---
+layout: default
+title: Ploutus - Visualize your retirement.
+---
+
+<div id="home">
+  <ul class="posts">
+    {% for post in site.posts %}
+      {% include post.html %}
+      <!--<li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>-->
+    {% endfor %}
+  </ul>
+</div>

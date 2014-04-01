@@ -1,0 +1,21 @@
+{
+  "name": "Ploutus",
+  "authors": [
+    {
+      "name": "Gary Borton",
+      "homepage": "http://www.garyborton.com"
+    }
+  ],
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.1.0",
+    "jquery": "~1.11.0",
+    "highcharts": "~3.0.4",
+    "knockout": "bowerjs/knockout#2.3.0",
+    "koExternalTemplateEngine": "https://github.com/ifandelse/Knockout.js-External-Template-Engine.git#2.0.5",
+    "requirejs": "~2.1.8",
+    "infuser": "ifandelse/infuser",
+    "TrafficCop": "ifandelse/TrafficCop"
+  }
+}

@@ -1,0 +1,34 @@
+---
+title: FIRE when ready
+layout: default
+---
+<div id="fire-when-ready-app">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="pull-right" style="height:0px">
+                <a href="" data-bind="click: showSimple, css: { 'text-muted': !isAdvanced() }">Simple</a> |
+                <a href="" data-bind="click: showAdvanced, css: { 'text-muted': isAdvanced() }">Advanced</a>
+            </div>
+
+            <legend>Financial Profile</legend>
+            <div data-bind="template: { name: 'views/simple' }, visible: !isAdvanced() "></div>
+            <div data-bind="template: { name: 'views/advanced' }, visible: isAdvanced() "></div>
+        </div>
+    </div>
+
+    <div class="panel panel-default" data-bind="visible: isAdvanced()">
+        <div class="panel-body" data-bind="template: { name: 'views/quick_facts' }">
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <legend>Portfolio Growth</legend>
+            <div id="container" style="width:100%; height:400px;"></div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-body" data-bind="template: { name: 'views/assumptions' }"></div>
+    </div>
+</div>
