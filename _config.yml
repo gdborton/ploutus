@@ -1,4 +1,4 @@
 name: Ploutus
 markdown: redcarpet
 pygments: true
-exclude: ['node_modules', 'bower_components', 'bower.json', 'package.json' 'build.txt', 'Gruntfile.js']
+exclude: ['node_modules', 'bower_components', 'bower.json', 'package.json', 'build.txt', 'Gruntfile.js']
