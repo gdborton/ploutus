@@ -10,7 +10,8 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         clean: {
             dist: ['dist'],
-            less: ['dist/css/*.less']
+            less: ['dist/css/*.less'],
+            compiled: ['css', 'static', 'build.txt', 'fire-when-ready']
         },
         less: {
             compile: {
@@ -40,8 +41,15 @@ module.exports = function (grunt) {
                     ]
                 }
             }
+        },
+        copy: {
+            dist: {
+                files: [
+                    {expand: true, cwd: 'dist/', src: ['*'], dest: '.'}
+                ]
+            }
         }
     });
 
-    grunt.registerTask('default', ['clean:dist', 'requirejs:compile', 'less:compile', 'clean:less']);
+    grunt.registerTask('default', ['clean:dist', 'clean:compiled', 'requirejs:compile', 'less:compile', 'clean:less', 'copy:dist', 'clean:dist']);
 };
