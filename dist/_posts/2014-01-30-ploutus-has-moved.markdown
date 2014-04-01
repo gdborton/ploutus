@@ -1,13 +1,13 @@
 ---
 layout: post
 title:  "Ploutus Has Moved!"
-date:   2014-02-28 22:57:59
+date:   2014-03-31 06:00:00
 ---
 
 If you've visited the site before you'll notice things have changed.  Moving forward, Ploutus will no longer be a simple
 financial independence tool.  The plans for the site have expanded to become a collection of tools aimed at helping
 people understand financial independence.  In preparation for some of the upcoming changes, a few existing things needed
-to change first.
+to change first.  Here's a short list of what's happened so far.
 
 #### I've changed hosts
 One of the changes already implemented is the move away from my previous host.  Ploutus is now hosted on

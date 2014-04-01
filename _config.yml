@@ -1,3 +1,4 @@
 name: Ploutus
 markdown: redcarpet
 pygments: true
+source: dist
