@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
     'use strict';
 
-	grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     grunt.loadNpmTasks('grunt-contrib-clean');
 
@@ -21,27 +21,27 @@ module.exports = function (grunt) {
                 }
             }
         },
-		requirejs: {
-			compile: {
-				options: {
-					appDir: 'src/',
-					mainConfigFile: 'src/static/javascripts/main.js',
-					dir: 'dist/',
-					optimize: 'uglify2',
+        requirejs: {
+            compile: {
+                options: {
+                    appDir: 'src/',
+                    mainConfigFile: 'src/static/javascripts/main.js',
+                    dir: 'dist/',
+                    optimize: 'uglify2',
                     optimizeCss: 'none',
                     paths: {
                         'requireLib': '../bower_components/requirejs/require'
                     },
-					modules: [
+                    modules: [
                         {
                             name: 'static/javascripts/main',
                             include: ['static/javascripts/main', 'requireLib'],
                             create: true
                         }
                     ]
-				}
-			}
-		}
+                }
+            }
+        }
     });
 
     grunt.registerTask('default', ['clean:dist', 'requirejs:compile', 'less:compile', 'clean:less']);
